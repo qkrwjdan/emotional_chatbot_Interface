@@ -65,7 +65,7 @@ A Radford, et al., ["Language Models are Unsupervised Multitask Learners"](https
 
 A Vaswani, et al., ["Attention is All you Need"](https://arxiv.org/pdf/1706.03762.pdf), NIPS 2017
 
-## Refrences
+## References
 [*openAI*](https://github.com/openai/gpt-2)
 
 [*emotional chatbot*](https://github.com/js-lee-AI/emotional-chatbot_gpt2)
