@@ -32,7 +32,7 @@ def audio_to_text(filename):
         filename)
 
     # Loads the audio into memory
-    with io.open(file_name, 'rb') as audio_file:	models/
+    with io.open(file_name, 'rb') as audio_file:
 
         content = audio_file.read()
         audio = speech.RecognitionAudio(content=content)
@@ -55,13 +55,7 @@ app = Flask(__name__)
 UPLOAD_FOLDER = 'uploads/'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif','wav'}
 
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-@app.route('/realtime/',methods=('GET', 'POST'))
+app.config['UPLOAD_FOLDER'] = _speech-to-text s=('GET', 'POST'))
 def realtime():
     if request.method == 'POST':
         print("hello, method is post")
@@ -127,6 +121,6 @@ if __name__ == "__main__":
     app.config['SESSION_TYPE'] = 'filesystem'
     # set ENVIRON
     # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(os.getcwd(YOUR_KEY))
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(os.getcwd(),'Lee_STT.json')
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(os.getcwd(),'key.json')
 
     app.run(threaded=False)
