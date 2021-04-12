@@ -37,7 +37,7 @@ you can see this page.
 
 ![ex_screenshot](./img/2021-04-12%2020-05-54.png)
 
-you can use **_text mode_** mode and **_speech mode_**.
+you can use **_text mode_** and **_speech mode_**.
 
 ### text mode
 click toggle and type your message.
@@ -48,7 +48,7 @@ click toggle and type your message.
 
 if you want to use speech mode, you need google **_speech-to-text key_**. refer this page [*speech to text*](https://www.youtube.com/watch?v=Ds-7D8d-FwA&t=1154s)
 
-if you get **_key.json_**, replace key.json with you **_key.json_**
+if you get **_key.json_**, replace key.json with your **_key.json_**
 
 
 then click toggle and click **_ChatBot_** .  text color changes to black. now you can to the chatbot with your mic.
