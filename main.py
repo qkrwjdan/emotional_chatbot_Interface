@@ -52,6 +52,9 @@ def audio_to_text(filename):
 
 app = Flask(__name__)
 
+UPLOAD_FOLDER = 'uploads/'
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif','wav'}
+
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def allowed_file(filename):
