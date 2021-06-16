@@ -52,10 +52,13 @@ def audio_to_text(filename):
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = 'uploads/'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif','wav'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-app.config['UPLOAD_FOLDER'] = _speech-to-text s=('GET', 'POST'))
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/realtime/',methods=('GET', 'POST'))
 def realtime():
     if request.method == 'POST':
         print("hello, method is post")
