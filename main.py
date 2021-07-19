@@ -104,7 +104,6 @@ def chat():
             
     print("GET")
     # chbot.clear_session()
-
     return render_template('chat.html')
 
 @app.route('/response/',methods=('GET','POST'))
@@ -121,6 +120,11 @@ def getResponse():
     context = {'text' : answer, 'recipient_id' : request.form['sender']}
 
     return context
+
+@app.route('/test/',methods=('GET','POST'))
+def test():
+
+    return render_template('chat_test.html')
 
 @app.route('/', methods=('GET', 'POST'))
 def index():

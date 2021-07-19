@@ -39,7 +39,7 @@ function send(message) {
 	console.log("User Message:", message)
 	$('#audio').attr("hidden",true)
 	$.ajax({
-		url: 'http://localhost:5000/chat',
+		url: 'http://localhost:5000/chat/',
 		type: 'POST',
 		contentType: 'application/json',
 		data: JSON.stringify({
