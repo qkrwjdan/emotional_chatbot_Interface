@@ -1,16 +1,42 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CHATBOT</title>
+    <link rel="stylesheet" href="../static/css/index.css">
 </head>
+
 <body>
-    <h1>Welcome! Here is Chatbot! </h1>
-    <img src="{{ url_for('static',filename='img/botAvatar.png')}}">
-    <br>
-    text chatbot -> <a href="/chat">here</a>
-    <br>
-    realtime mic chatbot -> <a href="/realtime">here</a>
-    
+    <div class="wrap">
+        <div class="contents">
+            <div class="card">
+                <h1>Hi I'm ChatBot!</h1>
+
+                <img id="chbot-character-img" src="{{ url_for('static',filename='img/botAvatar.png')}}">
+
+                <br>
+                <a href="/chat" class="a-btn">
+                    <div class="button-box">
+                        <!-- <a href="/text">Text version</a> -->
+                        <span>  Text version </span>
+                    </div>
+                </a>
+                
+
+                <br>
+                <a href="/realtime" class="a-btn">
+                    <div class="button-box">
+                        <span> Mic version </span>
+                    </div>
+                </a>
+                
+            </div>
+        </div>
+        
+
+    </div>
+
 </body>
+
 </html>

@@ -1,14 +1,14 @@
 from flask import Flask,redirect,render_template,url_for,request,flash
 from werkzeug.utils import secure_filename
 
-from gpt2.gpt2_generator import gpt2_tensor2 as gpt2
+# from gpt2.gpt2_generator import gpt2_tensor2 as gpt2
 
 import requests
 import json
 import os
 import time
 
-chbot = gpt2()
+# chbot = gpt2()
 
 def audio_to_text(filename):
     # [START speech_quickstart]
@@ -85,7 +85,7 @@ def realtime():
             return output
             
     print("GET")
-    chbot.clear_session()
+    # chbot.clear_session()
 
     return render_template('realtime.html')
 
@@ -95,13 +95,15 @@ def chat():
 
         input_text = request.json['message']
         
-        answer = chbot.interact_model(input_text)
+        # answer = chbot.interact_model(input_text)
+        print(input_text)
+        answer = "test"
         context = {'text' : answer, 'recipient_id' : request.json['sender']}
 
         return context
             
     print("GET")
-    chbot.clear_session()
+    # chbot.clear_session()
 
     return render_template('chat.html')
 
@@ -110,7 +112,9 @@ def getResponse():
 
     input_text = request.form['message']
         
-    answer = chbot.interact_model(input_text)
+    # answer = chbot.interact_model(input_text)
+    print(input_text)
+    answer = "test"
     print(answer)
     print(request.form['sender'])
 
@@ -129,4 +133,4 @@ if __name__ == "__main__":
     # os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(os.getcwd(YOUR_KEY))
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.path.join(os.getcwd(),'key.json')
 
-    app.run(threaded=False)
+    app.run(debug=True, threaded=False)
