@@ -12,23 +12,32 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/ab9bbc0a6d.js" crossorigin="anonymous"></script>
 
 </head>
 
 <body>
     <div class="wrap">
         <div class="header">
-            header
+            <!-- header -->
+            <div class="back-wrapper">
+                <a class="back" href="/">
+                    <i class="fas fa-chevron-left" id="refresh-icon"></i>
+                </a>
+            </div>
+
         </div>
         <div class="container">
             <div class="left-area">
-                container-left-area
-                <div class="refresh">
-
+                <!-- container-left-area -->
+                <div class="refresh-wrapper">
+                    <a class="refresh" href="/">
+                        <i class="fas fa-redo"></i>
+                    </a>
                 </div>
             </div>
             <div class="center-area">
-                container-center-area
+                <!-- container-center-area -->
                 <div class="chat_header">
                 </div>
 
@@ -44,38 +53,21 @@
                             autocomplete="off">
                     </div>
                     <div class="send-wrapper">
-                        <button class="favorite styled" type="button">
-                            Add to favorites
-                        </button>
-
+                        <button class="send"><i class="fas fa-paper-plane"></i></button>
                     </div>
                 </div>
 
             </div>
             <div class="right-area">
-                container-right-area
+                <!-- container-right-area -->
                 <div class="card">
                     <img id="chbot-character-img" src="{{ url_for('static',filename='img/botAvatar.png')}}">
+                    <h1 class="intro">Hi I'm ChatBot!</h1>
+                    <div class="description">
 
-                    <h1>Hi I'm ChatBot!</h1>
-
-                    <br>
-                    <a href="/chat" class="a-btn">
-                        <div class="button-box">
-                            <!-- <a href="/text">Text version</a> -->
-                            <span> Text version </span>
-                        </div>
-                    </a>
-
-
-                    <br>
-                    <a href="/realtime" class="a-btn">
-                        <div class="button-box">
-                            <span> Mic version </span>
-                        </div>
-                    </a>
-
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -86,7 +78,7 @@
     <script type="text/javascript" src="{{ url_for('static',filename='js/materialize.min.js')}}"></script>
     <!--Main Script -->
     <!-- <script type="text/javascript" src="{{ url_for('static',filename='js/script.js')}}"></script> -->
-    <script type="text/javascript" src="{{ url_for('static',filename='js/chat.js')}}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/chat_test.js')}}"></script>
 
 
 </body>

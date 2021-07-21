@@ -97,7 +97,7 @@ def chat():
         
         # answer = chbot.interact_model(input_text)
         print(input_text)
-        answer = "test"
+        answer = "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"
         context = {'text' : answer, 'recipient_id' : request.json['sender']}
 
         return context
@@ -113,7 +113,7 @@ def getResponse():
         
     # answer = chbot.interact_model(input_text)
     print(input_text)
-    answer = "test"
+    answer = "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"
     print(answer)
     print(request.form['sender'])
 

@@ -20,8 +20,9 @@ $('.usrInput').on('keyup keypress', function (e) {
 function setUserResponse(val) {
 
 	// var userAvatarSrc = "{{ url_for('static',filename='/img/userAvatar.jpg') }}"
-	var userAvatarSrc = "/static/img/userAvatar.jpg";
-	var UserResponse = '<img class="userAvatar" src="' 
+	// var userAvatarSrc = "/static/img/userAvatar.jpg";
+	var userAvatarSrc = "/static/img/user.png";
+	var UserResponse = '<img class="userAvatar" src="'
 		+ userAvatarSrc + '"><p class="userMsg">' + val + ' </p><div class="clearfix"></div>';
 	$(UserResponse).appendTo('.chats').show('slow');
 	$(".usrInput").val('');
@@ -37,7 +38,7 @@ function scrollToBottomOfResults() {
 
 function send(message) {
 	console.log("User Message:", message)
-	$('#audio').attr("hidden",true)
+	$('#audio').attr("hidden", true)
 	$.ajax({
 		url: 'http://localhost:5000/chat/',
 		type: 'POST',
@@ -48,10 +49,10 @@ function send(message) {
 		}),
 		success: function (data, textStatus) {
 			console.log(data)
-			if(data != null){
-					console.log("set bot response")
-					setBotResponse(data);
-					synthesize(data.text);
+			if (data != null) {
+				console.log("set bot response")
+				setBotResponse(data);
+				synthesize(data.text);
 			}
 			console.log("Rasa Response: ", data, "\n Status:", textStatus)
 		},
@@ -66,14 +67,14 @@ function send(message) {
 function setBotResponse(val) {
 	setTimeout(function () {
 
-        if (val.hasOwnProperty("text")) { 
-            var BotAvatarSrc = "/static/img/botAvatar.png";
+		if (val.hasOwnProperty("text")) {
+			var BotAvatarSrc = "/static/img/botAvatar.png";
 			var BotResponse = '<img class="botAvatar" src="'
 				+ BotAvatarSrc + '"><p class="botMsg">' + val.text + '</p><div class="clearfix"></div>';
-            $(BotResponse).appendTo('.chats').hide().fadeIn(1000);
-        }
+			$(BotResponse).appendTo('.chats').hide().fadeIn(1000);
+		}
 
-    scrollToBottomOfResults();
+		scrollToBottomOfResults();
 
 	}, 500);
 }

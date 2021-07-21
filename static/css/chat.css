@@ -1,5 +1,6 @@
 @charset "utf-8";
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100,300,500,700&display=swap');
+
 /*reset*/
 * {padding: 0; margin: 0;}
 
@@ -9,46 +10,60 @@ body {font-family: 'Roboto', sans-serif;}
 .wrap {
     width: 100vw;
     height: 100vh;
-    background: #E6E9FA;
 }
 
-.header{
+.header {
     width: 100%;
     height: 5%;
-    background: red;
+    display: flex;
+    align-items: center;
 }
 
-.container{
+.container {
     width:100%;
     height: 95%;
-    background: blue;
+    background: #E6E9FA;
     overflow: hidden;
     display: flex;
     justify-content: center;
 }
 
-.left-area{
+.left-area {
     float: left;
     width: 5%;
     height: 100%;
-    margin: 4px;
-    background: green;
+    margin: 3px;
+    text-align: center;
 }
 
-.center-area{
+.center-area {
     float: left;
     width: 60%;
     height: 100%;
-    margin: 4px;
-    background: yellow;
+    margin: 0px;
 }
 
-.right-area{
+.right-area {
     float: left;
-    width: 32%;
+    width: 35%;
     height: 100%;
-    margin: 4px;
-    background: violet;
+    margin: 3px;
+    display: flex;
+    justify-content: center;
+}
+
+.intro {
+    color: #6072e6;
+}
+
+.description {
+    height: 500px;
+}
+
+.card {
+    margin: auto auto;
+    text-align: center;
+    width: 100%;
 }
 
 .chats {
@@ -61,21 +76,101 @@ body {font-family: 'Roboto', sans-serif;}
 	transition: 0.2s;
 }
 
-.chat-footer{
-    height: 50px;
+div.chats::-webkit-scrollbar {
+	width: 0px;
+}
+
+div.chats::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 5px grey;
+	border-radius: 10px;
+}
+
+div.chats::-webkit-scrollbar-thumb {
+	background: #647aed;
+}
+
+div.chats::-webkit-scrollbar-thumb:hover {
+	background: #b30000;
+}
+
+.chat-footer {
+    height: 10%;
 	width: 100%;
-    background: tomato;    
+    background: white;
+    display: flex;
+    border-top: 3px solid #E6E9FA; 
+}
+
+.messageBox {
+    display: inline-block;
+    width: 100%;
+    height: auto;
+}
+
+.userMsg {
+	animation: animateElement linear 0.2s;
+	animation-iteration-count: 1;
+	margin-top: 15px;
+	word-wrap: break-word;
+	padding: 0.6em 1em;
+	float: right;
+	margin-right: 0.5em;
+	border: 1px solid #6072e6;
+	color: #fff;
+	margin-bottom: 0.15em;
+	font-size: 20px;
+	max-width: 55%;
+	min-width: 25%;
+	line-height: 1.5em;
+    background: #5F6FC9;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 17px;
+    font-weight: 100;
+}
+
+.clearfix {
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+.botMsg {
+	float: left;
+	margin-top: 15px;
+	box-shadow: 2px 5px 5px 1px #efeef5;
+	border: 1px solid #ffffff;
+	margin-left: 0.5em;
+	padding: 0.6em 1em;
+	max-width: 55%;
+	min-width: 25%;
+	font-size: 20px;
+	word-wrap: break-word;
+    background: #E6E9FA;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 17px;
+    font-weight: 100;
+}
+
+.userAvatar {
+	animation: animateElement linear 0.3s;
+	animation-iteration-count: 1;
+    width: 60px;
+    height: 60px;
+	float: right;
+	margin-right: 5px;
+}
+
+.botAvatar {
+    width: 45px;
+    height: 50px;
+	float: left;
+	margin-left: 5px;
 }
 
 .keypad {
-	height: 50px;
 	width: 90%;
-    background: darkblue;
-}
-
-#keypad {
-    height: 50px;
-    width: 99%;
+    background: white;
+    display: flex;
+    float: left;
 }
 
 @keyframes animateElement {
@@ -89,9 +184,59 @@ body {font-family: 'Roboto', sans-serif;}
 	}
 }
 
-.send-wrapper{
+.usrInput {
+    border-radius: 10px;
     height: 50px;
-    width: 50px;
-    float: right;
-    background: darkcyan;
+    width: 95%;
+    margin: auto auto;
+    margin-top: 10px;
+    margin-bottom: 20px;;
+    display: flex;
+    background: #FFFFFF;
+    border: 3px solid #E6E9FA;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 17px;
+    font-size: 15px;
+    padding: 10px;
 }
+
+input:focus {
+	outline: none;
+}
+
+input::placeholder {
+    color: gray;
+}
+
+.send-wrapper {
+    width: 10%;
+    display: flex;
+    align-items: center;
+}
+
+.send {
+    font-size: 35px;
+    color: #6072e6;
+    background-color:transparent;
+    border: 0;
+    margin-bottom: 10px;
+}
+
+.back {
+    font-size: 35px;
+    text-decoration: none;
+    color: #6072e6;
+    margin-left: 25px;
+}
+
+.refresh-wrapper {
+    margin-top: 30px;
+}
+
+.refresh {
+    font-size: 30px;
+    text-decoration: none;
+    color: #6072e6;
+}
+
