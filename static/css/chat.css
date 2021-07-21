@@ -60,6 +60,17 @@ body {font-family: 'Roboto', sans-serif;}
     height: 500px;
 }
 
+.pids-wrapper {
+    width: 100%;
+}
+
+.pid {
+    width: 10px;
+    height: 20px;
+    display: inline-block;
+    margin: 5px;
+}
+
 .card {
     margin: auto auto;
     text-align: center;
@@ -220,6 +231,22 @@ input::placeholder {
     color: #6072e6;
     background-color:transparent;
     border: 0;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.mic-wrapper {
+    width: 10%;
+    display: flex;
+    align-items: center;
+}
+
+.mic {
+    font-size: 35px;
+    color: #6072e6;
+    background-color:transparent;
+    border: 0;
+    margin: 0 auto;
     margin-bottom: 10px;
 }
 

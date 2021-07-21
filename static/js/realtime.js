@@ -1,89 +1,92 @@
 // on input/text enter--------------------------------------------------------------------------------------
 $('.usrInput').on('keyup keypress', function (e) {
-	var keyCode = e.keyCode || e.which;
-	var text = $(".usrInput").val();
-	if (keyCode === 13) {
-		if (text == "" || $.trim(text) == '') {
-			e.preventDefault();
-			return false;
-		} else {
-			$(".usrInput").blur();
-			setUserResponse(text);
-			send(text);
-			e.preventDefault();
-			return false;
-		}
-	}
+    var keyCode = e.keyCode || e.which;
+    var text = $(".usrInput").val();
+    if (keyCode === 13) {
+        if (text == "" || $.trim(text) == '') {
+            e.preventDefault();
+            return false;
+        } else {
+            $(".usrInput").blur();
+            setUserResponse(text);
+            send(text);
+            e.preventDefault();
+            return false;
+        }
+    }
 });
 
 //------------------------------------- Set user response------------------------------------
 function setUserResponse(val) {
-
-	var userAvatarSrc = "/static/img/userAvatar.jpg";
-	var UserResponse = '<img class="userAvatar" src="' + userAvatarSrc + '"><p class="userMsg">' + val + ' </p><div class="clearfix"></div>';
-	$(UserResponse).appendTo('.chats').show('slow');
-	$(".usrInput").val('');
-	scrollToBottomOfResults();
-	$('.suggestions').remove();
+    // var userAvatarSrc = "{{ url_for('static',filename='/img/userAvatar.jpg') }}"
+    // var userAvatarSrc = "/static/img/userAvatar.jpg";
+    var userAvatarSrc = "/static/img/user.png";
+    var UserResponse = '<div class = "messageBox"><img class="userAvatar" src="'
+        + userAvatarSrc + '"><div class="userMsg">' + val + ' </div><div class="clearfix"></div></div>';
+    $(UserResponse).appendTo('.chats').show('slow');
+    $(".usrInput").val('');
+    scrollToBottomOfResults();
+    $('.suggestions').remove();
 }
+
 
 //---------------------------------- Scroll to the bottom of the chats-------------------------------
 function scrollToBottomOfResults() {
-	var terminalResultsDiv = document.getElementById('chats');
-	terminalResultsDiv.scrollTop = terminalResultsDiv.scrollHeight;
+    var terminalResultsDiv = document.getElementById('chats');
+    terminalResultsDiv.scrollTop = terminalResultsDiv.scrollHeight;
 }
 
 function send(message) {
-	console.log("User Message:", message)
-	$.ajax({
-		url: 'http://localhost:5000/response/',
-		type: 'POST',
-		dataType: 'json',
-		data: {
-			"message": message,
-			"sender": "Me"
-		},
-		success: function (data, textStatus) {
+    console.log("User Message:", message)
+    $.ajax({
+        url: 'http://localhost:5000/response/',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            "message": message,
+            "sender": "Me"
+        },
+        success: function (data, textStatus) {
             console.log(data)
-			if(data != null){
-					setBotResponse(data);
-                    synthesize(data.text);
-			}
-			console.log("Rasa Response: ", data, "\n Status:", textStatus)
-		},
-		error: function (errorMessage) {
-			setBotResponse("");
-			console.log('Error' + errorMessage);
+            if (data != null) {
+                setBotResponse(data);
+                synthesize(data.text);
+            }
+            console.log("Rasa Response: ", data, "\n Status:", textStatus)
+        },
+        error: function (errorMessage) {
+            setBotResponse("");
+            console.log('Error' + errorMessage);
 
-		}
-	});
+        }
+    });
 }
 
 //------------------------------------ Set bot response -------------------------------------
 function setBotResponse(val) {
-	setTimeout(function () {
+    setTimeout(function () {
 
-        if (val.hasOwnProperty("text")) { 
+        if (val.hasOwnProperty("text")) {
             var BotAvatarSrc = "/static/img/botAvatar.png";
             var BotResponse = '<img class="botAvatar" src="' + BotAvatarSrc + '"><p class="botMsg">' + val.text + '</p><div class="clearfix"></div>';
             $(BotResponse).appendTo('.chats').hide().fadeIn(1000);
         }
 
-    scrollToBottomOfResults();
+        scrollToBottomOfResults();
 
-	}, 500);
+    }, 500);
 }
 
 // ------------------------------------------ Toggle chatbot -----------------------------------------------
 $('#profile_div').click(function () {
-	$('.profile_div').toggle();
-	$('.widget').toggle();
-	scrollToBottomOfResults();
+    $('.profile_div').toggle();
+    $('.widget').toggle();
+    scrollToBottomOfResults();
 });
 
 $('#close').click(function () {
-	$('.profile_div').toggle();
-	$('.widget').toggle();
+    $('.profile_div').toggle();
+    $('.widget').toggle();
 });
 
 // ------------------------------------------ Realtime Audio -----------------------------------------------
@@ -91,17 +94,17 @@ $('#close').click(function () {
 function colorPids(vol) {
 
     let all_pids = $('.pid');
-    let amout_of_pids = Math.round(vol/10);
+    let amout_of_pids = Math.round(vol / 10);
     let elem_range = all_pids.slice(0, amout_of_pids)
-    
+
     for (var i = 0; i < all_pids.length; i++) {
-        all_pids[i].style.backgroundColor="#e6e7e8";
+        all_pids[i].style.backgroundColor = "#e6e7e8";
     }
-    
+
     for (var i = 0; i < elem_range.length; i++) {
-        elem_range[i].style.backgroundColor="#69ce2b";
+        elem_range[i].style.backgroundColor = "#6072e6";
     }
-    
+
 }
 
 // audio recording
@@ -125,58 +128,58 @@ var record_status = false;
 
 //web page loaded.
 navigator.mediaDevices.getUserMedia({ audio: true })
-.then(function(e) {
-    console.log("user consent");
+    .then(function (e) {
+        console.log("user consent");
 
-    // creates the audio context
-    window.AudioContext = window.AudioContext || window.webkitAudioContext;
-    context = new AudioContext();
+        // creates the audio context
+        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        context = new AudioContext();
 
-    analyser = context.createAnalyser();
-    analyser.smoothingTimeConstant = 0.8;
-    analyser.fftSize = 1024;
+        analyser = context.createAnalyser();
+        analyser.smoothingTimeConstant = 0.8;
+        analyser.fftSize = 1024;
 
-    // creates an audio node from the microphone incoming stream
-    mediaStream = context.createMediaStreamSource(e);
+        // creates an audio node from the microphone incoming stream
+        mediaStream = context.createMediaStreamSource(e);
 
-    // https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/createScriptProcessor
-    // bufferSize: the onaudioprocess event is called when the buffer is full
-    if (context.createScriptProcessor) {
-        recorder = context.createScriptProcessor(bufferSize, numberOfInputChannels, numberOfOutputChannels);
-    } else {
-        recorder = context.createJavaScriptNode(bufferSize, numberOfInputChannels, numberOfOutputChannels);
-    }
-
-    recorder.onaudioprocess = function (e) {
-        leftchannel.push(new Float32Array(e.inputBuffer.getChannelData(0)));
-        rightchannel.push(new Float32Array(e.inputBuffer.getChannelData(1)));
-        recordingLength += bufferSize;
-
-        var average = getVolume();
-        colorPids(average);
-
-        filter = (filter * 0.8) + (average * 0.2);
-
-        if(filter > 30 && record_status == true){
-            console.log("create record start event");
-            var event = new Event('record_start');
-            audioController.dispatchEvent(event);
+        // https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/createScriptProcessor
+        // bufferSize: the onaudioprocess event is called when the buffer is full
+        if (context.createScriptProcessor) {
+            recorder = context.createScriptProcessor(bufferSize, numberOfInputChannels, numberOfOutputChannels);
+        } else {
+            recorder = context.createJavaScriptNode(bufferSize, numberOfInputChannels, numberOfOutputChannels);
         }
-    }
-    mediaStream.connect(analyser);
-    analyser.connect(recorder);
-    recorder.connect(context.destination);
+
+        recorder.onaudioprocess = function (e) {
+            leftchannel.push(new Float32Array(e.inputBuffer.getChannelData(0)));
+            rightchannel.push(new Float32Array(e.inputBuffer.getChannelData(1)));
+            recordingLength += bufferSize;
+
+            var average = getVolume();
+            colorPids(average);
+
+            filter = (filter * 0.8) + (average * 0.2);
+
+            if (filter > 30 && record_status == true) {
+                console.log("create record start event");
+                var event = new Event('record_start');
+                audioController.dispatchEvent(event);
+            }
+        }
+        mediaStream.connect(analyser);
+        analyser.connect(recorder);
+        recorder.connect(context.destination);
     });
 
 //record_start event occurred
-audioController.addEventListener("record_start",function(){
+audioController.addEventListener("record_start", function () {
 
     leftchannel = leftchannel.slice(-50);
     rightchannel = rightchannel.slice(-50);
     console.log(leftchannel.length);
 
-    recordingLength = (leftchannel.length + 1) * bufferSize ;
-    
+    recordingLength = (leftchannel.length + 1) * bufferSize;
+
     recorder.onaudioprocess = function (e) {
 
         leftchannel.push(new Float32Array(e.inputBuffer.getChannelData(0)));
@@ -189,7 +192,7 @@ audioController.addEventListener("record_start",function(){
 
         filter = (filter * 0.8) + (average * 0.2);
 
-        if(filter < 10){
+        if (filter < 10) {
             console.log("create record end event");
             var event = new Event('record_end');
             audioController.dispatchEvent(event);
@@ -197,7 +200,7 @@ audioController.addEventListener("record_start",function(){
     }
 });
 
-audioController.addEventListener("record_end",function(){
+audioController.addEventListener("record_end", function () {
     console.log("record end");
     recorder.disconnect(context.destination);
     analyser.disconnect(recorder);
@@ -263,7 +266,7 @@ audioController.addEventListener("record_end",function(){
 
         filter = (filter * 0.8) + (average * 0.2);
 
-        if(filter > 30 && record_status == true){
+        if (filter > 30 && record_status == true) {
             console.log("create record start event");
             var event = new Event('record_start');
             audioController.dispatchEvent(event);
@@ -276,13 +279,13 @@ audioController.addEventListener("record_end",function(){
 });
 
 function sendWav(blob) {
-    
+
     if (blob == null) {
         return;
     }
     console.log("Post");
     let filename = new Date().toString() + ".wav";
-    var file = new File([blob],filename)
+    var file = new File([blob], filename)
 
     var fd = new FormData();
     fd.append('fname', filename);
@@ -290,13 +293,13 @@ function sendWav(blob) {
 
     $.ajax({
         url: 'http://localhost:5000/realtime/',
-        type:'POST',
+        type: 'POST',
         contentType: false,
         processData: false,
         data: fd,
         success: function (data, textStatus) {
             console.log(data)
-            if(data != null){
+            if (data != null) {
                 setUserResponse(data);
                 console.log("google STT : ", data, "\n Status:", textStatus);
                 send(data);
@@ -306,7 +309,7 @@ function sendWav(blob) {
             setUserResponse("");
             console.log('Error' + errorMessage);
         }
-    }).done(function(data){
+    }).done(function (data) {
         console.log(data);
     });
 }
@@ -343,34 +346,54 @@ function writeUTFBytes(view, offset, string) {
 }
 var count = 0;
 
-function getVolume(){
+function getVolume() {
     var array = new Uint8Array(analyser.frequencyBinCount);
-        analyser.getByteFrequencyData(array);
-        var values = 0;
+    analyser.getByteFrequencyData(array);
+    var values = 0;
 
-        var length = array.length;
-        for (var i = 0; i < length; i++) {
-            values += (array[i]);
-        }
+    var length = array.length;
+    for (var i = 0; i < length; i++) {
+        values += (array[i]);
+    }
 
-        var average = values / length;
+    var average = values / length;
 
-        return average;
+    return average;
 }
 
 // ---------------------------------------------- record controller -----------------------------------------------
-audioController.addEventListener("click",function(e){
-
-    if(count % 2 == 0){
-        record_status = false;
-        audioController.style.color = "white";
-    }
-    else{
-        record_status = true;
-        audioController.style.color = "black";
-    }
-    console.log(record_status);
-
+audioController.addEventListener("click", function (e) {
     count += 1;
 
+    if (count % 2 == 0) {
+        record_status = false;
+        audioController.innerHTML = '<i class="fas fa-microphone-slash"></i>'
+    }
+    else {
+        record_status = true;
+        audioController.innerHTML = '<i class="fas fa-microphone"></i>'
+    }
+    console.log(record_status);
 })
+
+//------------------------------------synthesize-------------------------
+function synthesize(text) {
+    console.log("synthesize text : ", text)
+
+    fetch('http://localhost:9000/synthesize?text=' + encodeURIComponent(text), { cache: 'no-cache' })
+        .then(function (res) {
+            if (!res.ok) throw Error(res.statusText)
+            return res.blob()
+        }).then(function (blob) {
+            // q('#message').textContent = ''
+            // q('#button').disabled = false
+            $('#audio').attr("src", URL.createObjectURL(blob))
+            $('#audio').attr("hidden", false)
+            console.log("all done")
+        }).catch(function (err) {
+            // q('#message').textContent = 'Error: ' + err.message
+            // q('#button').disabled = false
+            console.log(err)
+        })
+
+}

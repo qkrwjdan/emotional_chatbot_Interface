@@ -7,16 +7,20 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/chat.css')}}">
+
     <!--Main css-->
     <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/materialize.min.css')}}"> -->
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/ab9bbc0a6d.js" crossorigin="anonymous"></script>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://kit.fontawesome.com/ab9bbc0a6d.js" crossorigin="anonymous"></script>
-
+    <style type="text/css">
+    </style>
 </head>
 
 <body>
+
     <div class="wrap">
         <div class="header">
             <!-- header -->
@@ -52,8 +56,8 @@
                         <input type="text" id="keypad" class="usrInput browser-default" placeholder="Type a message..."
                             autocomplete="off">
                     </div>
-                    <div class="send-wrapper">
-                        <button class="send"><i class="fas fa-paper-plane"></i></button>
+                    <div class="mic-wrapper">
+                        <button class="mic" id="audioController"><i class="fas fa-microphone-slash"></i></button>
                     </div>
                 </div>
 
@@ -64,13 +68,26 @@
                     <img id="chbot-character-img" src="{{ url_for('static',filename='img/botAvatar.png')}}">
                     <h1 class="intro">Hi I'm ChatBot!</h1>
                     <div class="description">
-
+                        <div class="pids-wrapper">
+                            <div class="pid"></div>
+                            <div class="pid"></div>
+                            <div class="pid"></div>
+                            <div class="pid"></div>
+                            <div class="pid"></div>
+                            <div class="pid"></div>
+                            <div class="pid"></div>
+                            <div class="pid"></div>
+                            <div class="pid"></div>
+                            <div class="pid"></div>
+                        </div>
+                        <audio id="audio" controls autoplay></audio>
                     </div>
                 </div>
 
             </div>
         </div>
     </div>
+
 
     <!--JavaScript at end of body for optimized loading-->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
