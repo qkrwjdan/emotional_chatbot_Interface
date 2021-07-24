@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>ChatBot</title>
+   <!--Import Google Icon Font-->
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   <!--Import materialize.css-->
+   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/chat.css')}}">
+
+   <!--Main css-->
+   <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/materialize.min.css')}}"> -->
+
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   <script src="https://kit.fontawesome.com/ab9bbc0a6d.js" crossorigin="anonymous"></script>
+   <!--Let browser know website is optimized for mobile-->
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <style type="text/css">
+   </style>
+</head>
+
+<body>
+
+   <div class="wrap">
+      <div class="header">
+         <!-- header -->
+         <div class="back-wrapper">
+            <a class="back" href="/">
+               <i class="fas fa-chevron-left" id="refresh-icon"></i>
+            </a>
+         </div>
+
+      </div>
+      <div class="container">
+         <div class="left-area">
+            <!-- container-left-area -->
+            <div class="refresh-wrapper">
+               <a class="refresh" href="/realtime">
+                  <i class="fas fa-redo"></i>
+               </a>
+            </div>
+         </div>
+         <div class="center-area">
+            <!-- container-center-area -->
+            <div class="chat_header">
+            </div>
+
+
+            <div class="chats" id="chats">
+
+            </div>
+
+
+            <div class="chat-footer">
+               <div class="keypad">
+                  <input type="text" id="keypad" class="usrInput browser-default" placeholder="Type a message..."
+                     autocomplete="off">
+               </div>
+               <div class="mic-wrapper">
+                  <button class="mic" id="audioController"><i class="fas fa-microphone-slash"></i></button>
+               </div>
+            </div>
+
+         </div>
+         <div class="right-area">
+            <!-- container-right-area -->
+            <div class="card">
+               <img id="chbot-character-img" src="{{ url_for('static',filename='img/botAvatar.png')}}">
+               <h1 class="intro">Hi I'm ChatBot!</h1>
+               <div class="description">
+                  <div class="pids-wrapper">
+                     <div class="pid"></div>
+                     <div class="pid"></div>
+                     <div class="pid"></div>
+                     <div class="pid"></div>
+                     <div class="pid"></div>
+                     <div class="pid"></div>
+                     <div class="pid"></div>
+                     <div class="pid"></div>
+                     <div class="pid"></div>
+                     <div class="pid"></div>
+                  </div>
+                  <audio id="audio" controls autoplay></audio>
+               </div>
+            </div>
+
+         </div>
+      </div>
+   </div>
+
+
+   <!--JavaScript at end of body for optimized loading-->
+   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+   <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+   <script type="text/javascript" src="{{ url_for('static',filename='js/materialize.min.js')}}"></script>
+   <!--Main Script -->
+   <!-- <script type="text/javascript" src="{{ url_for('static',filename='js/script.js')}}"></script> -->
+   <script type="text/javascript" src="{{ url_for('static',filename='js/test.js')}}"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;1,700&display=swap');
+/*reset*/
+* {padding: 0; margin: 0;}
+
+body {font-family: 'Roboto', sans-serif;}
+
+h1 {
+    color: #5F6FC9;
+}
+
+.wrap {
+    width:100%;
+    height: 100%;
+    background: #E6E9FA;
+    display: flex;
+    justify-content: center;
+}
+
+.contents {
+    width: 1080px; 
+    background: white;
+    margin: 0 auto;
+    display: flex;
+}
+
+.card {
+    background: white; 
+    width: 540px;
+    margin: auto auto;
+    text-align: center;
+}
+
+#chbot-character-img {
+    margin: 30px;
+    transition: all 1s;
+}
+
+a.a-btn, .button-box {
+    margin: 0 auto;
+    width: 180px;
+    height: 40px;
+    background: #E6E9FA;
+    text-align: center;
+    border-radius: 30px;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    border-radius: 30px;
+    display: flex;
+}
+
+a.a-btn {
+    text-decoration: none;
+}
+
+
+.button-box {
+  transition: all .25s;
+}
+
+
+.button-box:hover {
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+.button-box span {
+    margin: auto auto;
+    color: #5F6FC9;
+}
