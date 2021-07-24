@@ -18,25 +18,25 @@
 
 <body>
     <div class="wrap">
-        <div class="header">
+        <header class="header">
             <!-- header -->
-            <div class="back-wrapper">
+            <nav class="back-wrapper">
                 <a class="back" href="/">
                     <i class="fas fa-chevron-left" id="refresh-icon"></i>
                 </a>
-            </div>
+            </nav>
 
-        </div>
+        </header>
         <div class="container">
-            <div class="left-area">
+            <section class="left-area">
                 <!-- container-left-area -->
-                <div class="refresh-wrapper">
+                <nav class="refresh-wrapper">
                     <a class="refresh" href="/chat">
                         <i class="fas fa-redo"></i>
                     </a>
-                </div>
-            </div>
-            <div class="center-area">
+                </nav>
+            </section>
+            <section class="center-area">
                 <!-- container-center-area -->
                 <div class="chat_header">
                 </div>
@@ -57,18 +57,18 @@
                     </div>
                 </div>
 
-            </div>
-            <div class="right-area">
+            </section>
+            <section class="right-area">
                 <!-- container-right-area -->
                 <div class="card">
-                    <img id="chbot-character-img" src="{{ url_for('static',filename='img/botAvatar.png')}}">
+                    <img id="chbot-character-img" src="{{ url_for('static',filename='img/botAvatar.png')}}" alt="chatbot logo">
                     <h1 class="intro">Hi I'm ChatBot!</h1>
                     <div class="description">
 
                     </div>
                 </div>
 
-            </div>
+            </section>
         </div>
     </div>
 
