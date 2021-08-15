@@ -82,8 +82,14 @@
                   </div>
                   <audio id="audio" controls autoplay></audio>
                   <div class="image-box">
-                     <img src="" class="user-image"></img>
-                 </div>
+                     <img src="" class="user-image" onerror="this.style.display='none'"></img>
+                  </div>
+                  <label class="switch">
+                     <input type="checkbox">
+                     <span class="slider round"></span>
+                  </label>
+                  <p>OFF</p>
+                  <p style="display:none;">ON</p>
                </div>
             </div>
 

@@ -120,8 +120,13 @@ navigator.mediaDevices
     const track = mediaStream.getVideoTracks()[0];
     let imageCapture = new ImageCapture(track);
 
+    imageCapture.takePhoto().then(function (blob) {
+      imgTag.src = URL.createObjectURL(blob);
+    });
+
     setInterval(function () {
       if (videoStatus) {
+        imgTag.style.display = "inline";
         imageCapture.takePhoto().then(function (blob) {
           imgTag.src = URL.createObjectURL(blob);
         });
@@ -137,10 +142,13 @@ let videoStatus = false;
 
 check.click(function () {
   $("p").toggle();
+  let imgTag = document.getElementsByClassName("user-image")[0];
 
   if (videoStatus == false) {
     videoStatus = true;
+    imgTag.style.display = "inline";
   } else {
     videoStatus = false;
+    imgTag.style.display = "none";
   }
 });

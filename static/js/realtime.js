@@ -128,6 +128,21 @@ var bufferSize = 2048;
 var numberOfInputChannels = 2;
 var numberOfOutputChannels = 2;
 var record_status = false;
+var check = $("input[type='checkbox']");
+let videoStatus = false;
+
+check.click(function () {
+  $("p").toggle();
+  let imgTag = document.getElementsByClassName("user-image")[0];
+
+  if (videoStatus == false) {
+    videoStatus = true;
+    imgTag.style.display = "inline";
+  } else {
+    videoStatus = false;
+    imgTag.style.display = "none";
+  }
+});
 
 //web page loaded.
 navigator.mediaDevices
@@ -149,9 +164,12 @@ navigator.mediaDevices
     });
 
     setInterval(function () {
-      imageCapture.takePhoto().then(function (blob) {
-        imgTag.src = URL.createObjectURL(blob);
-      });
+      if (videoStatus) {
+        imgTag.style.display = "inline";
+        imageCapture.takePhoto().then(function (blob) {
+          imgTag.src = URL.createObjectURL(blob);
+        });
+      }
     }, 5000);
 
     // creates the audio context
