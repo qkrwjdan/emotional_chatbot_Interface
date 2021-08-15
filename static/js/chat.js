@@ -120,16 +120,27 @@ navigator.mediaDevices
     const track = mediaStream.getVideoTracks()[0];
     let imageCapture = new ImageCapture(track);
 
-    imageCapture.takePhoto().then(function (blob) {
-      imgTag.src = URL.createObjectURL(blob);
-    });
-
     setInterval(function () {
-      imageCapture.takePhoto().then(function (blob) {
-        imgTag.src = URL.createObjectURL(blob);
-      });
+      if (videoStatus) {
+        imageCapture.takePhoto().then(function (blob) {
+          imgTag.src = URL.createObjectURL(blob);
+        });
+      }
     }, 5000);
   })
   .catch(function (err) {
     console.log(err.name + ": " + err.message);
   });
+
+var check = $("input[type='checkbox']");
+let videoStatus = false;
+
+check.click(function () {
+  $("p").toggle();
+
+  if (videoStatus == false) {
+    videoStatus = true;
+  } else {
+    videoStatus = false;
+  }
+});
