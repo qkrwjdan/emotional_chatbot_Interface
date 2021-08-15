@@ -58,15 +58,20 @@ body {font-family: 'Roboto', sans-serif;}
 
 .description {
     height: 500px;
-    display: flex;
-    justify-content: center;
+    /* display: flex;
+    justify-content: center; */
 }
 
-.video_box {
+.image-box {
+    width: auto;
+    height: auto;
+    margin: auto auto;
+    margin-top : 50px;
+}
+
+.user-image {
     width: 360px;
-    height: 240px;
-    border-style: dotted;
-    margin-top: 50px;
+    height: 220px;
 }
 
 .pids-wrapper {

@@ -107,7 +107,6 @@ $("#close").click(function () {
 });
 
 // Media
-
 navigator.mediaDevices
   .getUserMedia({
     video: {
@@ -116,11 +115,21 @@ navigator.mediaDevices
     },
   })
   .then(function (mediaStream) {
-      let video = document.getElementsByClassName("user-video")[0]
-      video.srcObject = mediaStream;
-      video.onloadedmetadata = function(e){
-          video.play();
-      };
-  }).catch(function(err) {
-      console.log(err.name + ": " + err.message);
+    let imgTag = document.getElementsByClassName("user-image")[0];
+
+    const track = mediaStream.getVideoTracks()[0];
+    let imageCapture = new ImageCapture(track);
+
+    imageCapture.takePhoto().then(function (blob) {
+      imgTag.src = URL.createObjectURL(blob);
+    });
+
+    setInterval(function () {
+      imageCapture.takePhoto().then(function (blob) {
+        imgTag.src = URL.createObjectURL(blob);
+      });
+    }, 5000);
+  })
+  .catch(function (err) {
+    console.log(err.name + ": " + err.message);
   });

@@ -130,56 +130,77 @@ var numberOfOutputChannels = 2;
 var record_status = false;
 
 //web page loaded.
-navigator.mediaDevices.getUserMedia({ audio: true }).then(function (e) {
-  console.log("user consent");
+navigator.mediaDevices
+  .getUserMedia({
+    audio: true,
+    video: {
+      width: 360,
+      height: 240,
+    },
+  })
+  .then(function (e) {
+    let imgTag = document.getElementsByClassName("user-image")[0];
 
-  // creates the audio context
-  window.AudioContext = window.AudioContext || window.webkitAudioContext;
-  context = new AudioContext();
+    const track = e.getVideoTracks()[0];
+    let imageCapture = new ImageCapture(track);
 
-  analyser = context.createAnalyser();
-  analyser.smoothingTimeConstant = 0.8;
-  analyser.fftSize = 1024;
+    imageCapture.takePhoto().then(function (blob) {
+      imgTag.src = URL.createObjectURL(blob);
+    });
 
-  // creates an audio node from the microphone incoming stream
-  mediaStream = context.createMediaStreamSource(e);
+    setInterval(function () {
+      imageCapture.takePhoto().then(function (blob) {
+        imgTag.src = URL.createObjectURL(blob);
+      });
+    }, 5000);
 
-  // https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/createScriptProcessor
-  // bufferSize: the onaudioprocess event is called when the buffer is full
-  if (context.createScriptProcessor) {
-    recorder = context.createScriptProcessor(
-      bufferSize,
-      numberOfInputChannels,
-      numberOfOutputChannels
-    );
-  } else {
-    recorder = context.createJavaScriptNode(
-      bufferSize,
-      numberOfInputChannels,
-      numberOfOutputChannels
-    );
-  }
+    // creates the audio context
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    context = new AudioContext();
 
-  recorder.onaudioprocess = function (e) {
-    leftchannel.push(new Float32Array(e.inputBuffer.getChannelData(0)));
-    rightchannel.push(new Float32Array(e.inputBuffer.getChannelData(1)));
-    recordingLength += bufferSize;
+    analyser = context.createAnalyser();
+    analyser.smoothingTimeConstant = 0.8;
+    analyser.fftSize = 1024;
 
-    var average = getVolume();
-    colorPids(average);
+    // creates an audio node from the microphone incoming stream
+    mediaStream = context.createMediaStreamSource(e);
 
-    filter = filter * 0.8 + average * 0.2;
-
-    if (filter > 30 && record_status == true) {
-      console.log("create record start event");
-      var event = new Event("record_start");
-      audioController.dispatchEvent(event);
+    // https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/createScriptProcessor
+    // bufferSize: the onaudioprocess event is called when the buffer is full
+    if (context.createScriptProcessor) {
+      recorder = context.createScriptProcessor(
+        bufferSize,
+        numberOfInputChannels,
+        numberOfOutputChannels
+      );
+    } else {
+      recorder = context.createJavaScriptNode(
+        bufferSize,
+        numberOfInputChannels,
+        numberOfOutputChannels
+      );
     }
-  };
-  mediaStream.connect(analyser);
-  analyser.connect(recorder);
-  recorder.connect(context.destination);
-});
+
+    recorder.onaudioprocess = function (e) {
+      leftchannel.push(new Float32Array(e.inputBuffer.getChannelData(0)));
+      rightchannel.push(new Float32Array(e.inputBuffer.getChannelData(1)));
+      recordingLength += bufferSize;
+
+      var average = getVolume();
+      colorPids(average);
+
+      filter = filter * 0.8 + average * 0.2;
+
+      if (filter > 30 && record_status == true) {
+        console.log("create record start event");
+        var event = new Event("record_start");
+        audioController.dispatchEvent(event);
+      }
+    };
+    mediaStream.connect(analyser);
+    analyser.connect(recorder);
+    recorder.connect(context.destination);
+  });
 
 //record_start event occurred
 audioController.addEventListener("record_start", function () {
