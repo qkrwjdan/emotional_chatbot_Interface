@@ -105,3 +105,22 @@ $("#close").click(function () {
   $(".profile_div").toggle();
   $(".widget").toggle();
 });
+
+// Media
+
+navigator.mediaDevices
+  .getUserMedia({
+    video: {
+      width: 360,
+      height: 240,
+    },
+  })
+  .then(function (mediaStream) {
+      let video = document.getElementsByClassName("user-video")[0]
+      video.srcObject = mediaStream;
+      video.onloadedmetadata = function(e){
+          video.play();
+      };
+  }).catch(function(err) {
+      console.log(err.name + ": " + err.message);
+  });
