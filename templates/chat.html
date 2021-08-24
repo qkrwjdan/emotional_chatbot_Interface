@@ -31,21 +31,23 @@
     <div class="wrap">
       <header class="header">
         <!-- header -->
-        <nav class="back-wrapper">
+        <nav class="nav-wrapper">
           <a class="back" href="/">
             <i class="fas fa-chevron-left" id="refresh-icon"></i>
+          </a>
+          <a class="refresh" href="/chat">
+            <i class="fas fa-redo"></i>
           </a>
         </nav>
       </header>
       <div class="container">
-        <section class="left-area">
-          <!-- container-left-area -->
+        <!-- <section class="left-area">
           <nav class="refresh-wrapper">
             <a class="refresh" href="/chat">
               <i class="fas fa-redo"></i>
             </a>
           </nav>
-        </section>
+        </section> -->
         <section class="center-area">
           <!-- container-center-area -->
           <div class="chat_header"></div>
@@ -72,6 +74,7 @@
           <div class="card">
             <img
               id="chbot-character-img"
+              class="chbot-img"
               src="{{ url_for('static',filename='img/botAvatar.png')}}"
               alt="chatbot logo"
             />
@@ -85,12 +88,14 @@
                   alt=""
                 />
               </div>
-              <label class="switch">
-                <input type="checkbox" />
-                <span class="slider round"></span>
-              </label>
-              <p>OFF</p>
-              <p style="display: none">ON</p>
+              <div class="switch-box">
+                <label class="switch">
+                  <input type="checkbox" />
+                  <span class="slider round"></span>
+                </label>
+                <p class="switch-text">OFF</p>
+                <p class="switch-text" style="display: none">ON</p>
+              </div>
             </div>
           </div>
         </section>
