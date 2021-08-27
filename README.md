@@ -20,8 +20,10 @@ $ pip install -r requirements.txt
 1) clik the [link](https://drive.google.com/file/d/1CzCNAuaXiaQsdCMTiki2X9XuyCwowQY3/view?usp=sharing) and download.
 2) Place the downloaded model in ***models\345M_org.***.
 
-
-
+## Install Flask
+```
+$ pip install flask
+```
 
 ## Usage
 

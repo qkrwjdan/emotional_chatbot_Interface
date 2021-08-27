@@ -37,7 +37,7 @@ body {font-family: 'Roboto', sans-serif;}
 .center-area {
     float: left;
     width: 60%;
-    height: 100%;
+    height: calc(100vh - 40px);
     margin: 0px;
 }
 
@@ -52,12 +52,6 @@ body {font-family: 'Roboto', sans-serif;}
 
 .intro {
     color: #6072e6;
-}
-
-.description {
-    height: 500px;
-    /* display: flex;
-    justify-content: center; */
 }
 
 .image-box {
@@ -119,10 +113,10 @@ div.chats::-webkit-scrollbar-thumb:hover {
 }
 
 .chat-footer {
-    height: 10%;
 	width: 100%;
     background: white;
     display: flex;
+    justify-content: center;
     border-top: 3px solid #E6E9FA; 
 }
 
@@ -195,7 +189,8 @@ div.chats::-webkit-scrollbar-thumb:hover {
 	width: 90%;
     background: white;
     display: flex;
-    float: left;
+    align-items: center;
+    justify-content: center;
 }
 
 @keyframes animateElement {
@@ -210,13 +205,9 @@ div.chats::-webkit-scrollbar-thumb:hover {
 }
 
 .usrInput {
-    border-radius: 10px;
-    height: 50px;
+    display: block;
+    height: 60%;
     width: 95%;
-    margin: auto auto;
-    margin-top: 10px;
-    margin-bottom: 20px;;
-    display: flex;
     background: #FFFFFF;
     border: 3px solid #E6E9FA;
     box-sizing: border-box;
@@ -238,6 +229,8 @@ input::placeholder {
     width: 10%;
     display: flex;
     align-items: center;
+    object-fit: contain;
+    object-position: center;
 }
 
 .send {
@@ -245,14 +238,14 @@ input::placeholder {
     color: #6072e6;
     background-color:transparent;
     border: 0;
-    margin: 0 auto;
-    margin-bottom: 10px;
 }
 
 .mic-wrapper {
     width: 10%;
     display: flex;
     align-items: center;
+    object-fit: contain;
+    object-position: center;
 }
 
 .mic {
@@ -260,8 +253,6 @@ input::placeholder {
     color: #6072e6;
     background-color:transparent;
     border: 0;
-    margin: 0 auto;
-    margin-bottom: 10px;
 }
 
 .back {
@@ -285,12 +276,11 @@ input::placeholder {
     align-items: center;
 }
 
-
 @media screen and (max-width: 768px),
  screen and (max-height: 768px) and (orientation: landscape) {
     .container {
         flex-direction: column-reverse;
-        justify-content: inherit;
+        justify-content: space-around;
         align-items: center;
     }
     .right-area .card .chbot-img,
@@ -302,13 +292,29 @@ input::placeholder {
     }
     .center-area {
         width: 80vw;
+        height: calc(100vh - 130px);
     }
     .center-area .chats {
         margin-top: 0;
     }
+    .center-area .usrInput {
+        font-size: 14px;
+        padding: 8px;
+    }
+    .center-area .send,
+    .center-area .mic {
+        font-size: 20px;
+    }
     .right-area .description {
         display: flex;
         justify-content: center;
+    }
+    .right-area .box-wrap {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+    }
+    .right-area .image-box {
+        width: 100%;
     }
     .right-area .image-box {
         height: 90px;
@@ -320,6 +326,27 @@ input::placeholder {
     }
     .right-area .switch-box {
         margin: 20px 10px 0;
+    }
+    .right-area .switch-text {
+        font-size: 14px;
+    } 
+    /* realtime */
+    .rt-right-area {
+        height: 135px;
+    }
+    .rt-center-area {
+        width: 80vw;
+        height: calc(100vh - 190px);
+    }
+    .right-area .rt-description {
+        height: 135px;
+        flex-wrap: wrap;
+    }
+    .right-area .audio-box .pids-wrapper {
+        height: 15px;
+    }
+    .right-area .audio-box audio {
+        height: 30px;
     }
 }
 
