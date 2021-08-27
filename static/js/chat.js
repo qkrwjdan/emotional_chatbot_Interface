@@ -106,6 +106,10 @@ $("#close").click(function () {
   $(".widget").toggle();
 });
 
+let isCamera = false;
+var check = $("input[type='checkbox']");
+let videoStatus = false;
+
 // Media
 navigator.mediaDevices
   .getUserMedia({
@@ -115,6 +119,7 @@ navigator.mediaDevices
     },
   })
   .then(function (mediaStream) {
+    isCamera = true;
     let imgTag = document.getElementsByClassName("user-image")[0];
 
     const track = mediaStream.getVideoTracks()[0];
@@ -135,20 +140,25 @@ navigator.mediaDevices
   })
   .catch(function (err) {
     console.log(err.name + ": " + err.message);
-  });
+    let imgTag = document.getElementsByClassName("user-image")[0];
 
-var check = $("input[type='checkbox']");
-let videoStatus = false;
-
-check.click(function () {
-  $("p").toggle();
-  let imgTag = document.getElementsByClassName("user-image")[0];
-
-  if (videoStatus == false) {
-    videoStatus = true;
-    imgTag.style.display = "inline";
-  } else {
+    isCamera = false;
     videoStatus = false;
     imgTag.style.display = "none";
+  });
+
+check.click(function () {
+  if (isCamera){
+    $("p").toggle();
+    let imgTag = document.getElementsByClassName("user-image")[0];
+
+    if (videoStatus == false) {
+      videoStatus = true;
+      imgTag.style.display = "inline";
+    } else {
+      videoStatus = false;
+      imgTag.style.display = "none";
+    }
   }
+
 });
