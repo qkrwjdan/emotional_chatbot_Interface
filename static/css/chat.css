@@ -284,15 +284,16 @@ input::placeholder {
         align-items: center;
     }
     .right-area .card .chbot-img,
-    .right-area .card .intro {
+    .right-area .card .intro,
+    .right-area .card .box-wrap {
         display: none;
     }
     .right-area {
-        height: 90px;
+        height: 5px;
     }
     .center-area {
         width: 80vw;
-        height: calc(100vh - 130px);
+        height: calc(100vh - 50px);
     }
     .center-area .chats {
         margin-top: 0;
@@ -305,42 +306,16 @@ input::placeholder {
     .center-area .mic {
         font-size: 20px;
     }
-    .right-area .description {
-        display: flex;
-        justify-content: center;
-    }
-    .right-area .box-wrap {
-        display: grid;
-        grid-template-columns: 160px 1fr;
-    }
-    .right-area .image-box {
-        width: 100%;
-    }
-    .right-area .image-box {
-        height: 90px;
-        margin: 0 auto;
-    }
-    .right-area .user-image {
-        width: 160px;
-        height: 90px;
-    }
-    .right-area .switch-box {
-        margin: 20px 10px 0;
-    }
-    .right-area .switch-text {
-        font-size: 14px;
-    } 
     /* realtime */
     .rt-right-area {
-        height: 135px;
+        height: 45px;
     }
     .rt-center-area {
-        width: 80vw;
-        height: calc(100vh - 190px);
+        height: calc(100vh - 90px);
     }
     .right-area .rt-description {
-        height: 135px;
-        flex-wrap: wrap;
+        display: flex;
+        justify-content: center;
     }
     .right-area .audio-box .pids-wrapper {
         height: 15px;
