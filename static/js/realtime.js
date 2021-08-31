@@ -127,20 +127,27 @@ var filter = 0;
 var bufferSize = 2048;
 var numberOfInputChannels = 2;
 var numberOfOutputChannels = 2;
+
 var record_status = false;
 var check = $("input[type='checkbox']");
 let videoStatus = false;
+let isMobile = false;
+let isCamera = false;
+
+isMobile = navigator.userAgent.match(/iPad|iPod|Android|iPhone/i);
 
 check.click(function () {
-  $("p").toggle();
-  let imgTag = document.getElementsByClassName("user-image")[0];
+  if (isCamera) {
+    $("p").toggle();
+    let videoTag = document.getElementsByClassName("user-video")[0];
 
-  if (videoStatus == false) {
-    videoStatus = true;
-    imgTag.style.display = "inline";
-  } else {
-    videoStatus = false;
-    imgTag.style.display = "none";
+    if (videoStatus == false) {
+      videoStatus = true;
+      videoTag.style.display = "inline";
+    } else {
+      videoStatus = false;
+      videoTag.style.display = "none";
+    }
   }
 });
 
@@ -154,23 +161,15 @@ navigator.mediaDevices
     },
   })
   .then(function (e) {
-    let imgTag = document.getElementsByClassName("user-image")[0];
+    if (!isMobile) {
+      let videoTag = document.getElementsByClassName("user-video")[0];
 
-    const track = e.getVideoTracks()[0];
-    let imageCapture = new ImageCapture(track);
-
-    imageCapture.takePhoto().then(function (blob) {
-      imgTag.src = URL.createObjectURL(blob);
-    });
-
-    setInterval(function () {
-      if (videoStatus) {
-        imgTag.style.display = "inline";
-        imageCapture.takePhoto().then(function (blob) {
-          imgTag.src = URL.createObjectURL(blob);
-        });
-      }
-    }, 5000);
+      isCamera = true;
+      videoTag.srcObject = mediaStream;
+      videoTag.onloadedmetadata = function (e) {
+        videoTag.play();
+      };
+    }
 
     // creates the audio context
     window.AudioContext = window.AudioContext || window.webkitAudioContext;

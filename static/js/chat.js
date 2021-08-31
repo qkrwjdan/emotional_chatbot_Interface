@@ -107,58 +107,53 @@ $("#close").click(function () {
 });
 
 let isCamera = false;
+let isMobile = false;
 var check = $("input[type='checkbox']");
 let videoStatus = false;
+let videoTag = document.getElementsByClassName("user-video")[0];
+
+isMobile = navigator.userAgent.match(/iPad|iPod|Android|iPhone/i);
 
 // Media
-navigator.mediaDevices
-  .getUserMedia({
-    video: {
-      width: 360,
-      height: 240,
-    },
-  })
-  .then(function (mediaStream) {
-    isCamera = true;
-    let imgTag = document.getElementsByClassName("user-image")[0];
+if (!isMobile) {
+  navigator.mediaDevices
+    .getUserMedia({
+      video: {
+        width: 360,
+        height: 240
+      },
+    })
+    .then(function (mediaStream) {
+			isCamera = true;
 
-    const track = mediaStream.getVideoTracks()[0];
-    let imageCapture = new ImageCapture(track);
+			isMobile = true;
+			videoTag.srcObject = mediaStream;
+			videoTag.onloadedmetadata = function (e) {
+				videoTag.play();
+			}
+      
+    })
+    .catch(function (err) {
+      console.log(err.name + ": " + err.message);
 
-    imageCapture.takePhoto().then(function (blob) {
-      imgTag.src = URL.createObjectURL(blob);
+      isCamera = false;
+      videoStatus = false;
+      videoTag.style.display = "none";
     });
-
-    setInterval(function () {
-      if (videoStatus) {
-        imgTag.style.display = "inline";
-        imageCapture.takePhoto().then(function (blob) {
-          imgTag.src = URL.createObjectURL(blob);
-        });
-      }
-    }, 5000);
-  })
-  .catch(function (err) {
-    console.log(err.name + ": " + err.message);
-    let imgTag = document.getElementsByClassName("user-image")[0];
-
-    isCamera = false;
-    videoStatus = false;
-    imgTag.style.display = "none";
-  });
+}
 
 check.click(function () {
-  if (isCamera){
+  if (isCamera) {
     $("p").toggle();
-    let imgTag = document.getElementsByClassName("user-image")[0];
+    let videoTag = document.getElementsByClassName("user-video")[0];
 
     if (videoStatus == false) {
       videoStatus = true;
-      imgTag.style.display = "inline";
+      videoTag.style.display = "inline";
+
     } else {
       videoStatus = false;
-      imgTag.style.display = "none";
+      videoTag.style.display = "none";
     }
   }
-
 });
