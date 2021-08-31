@@ -165,7 +165,7 @@ navigator.mediaDevices
       let videoTag = document.getElementsByClassName("user-video")[0];
 
       isCamera = true;
-      videoTag.srcObject = mediaStream;
+      videoTag.srcObject = e;
       videoTag.onloadedmetadata = function (e) {
         videoTag.play();
       };
