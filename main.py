@@ -89,6 +89,34 @@ def realtime():
 
     return render_template('realtime.html')
 
+@app.route('/korean/',methods=('GET', 'POST'))
+def korean():
+    if request.method == 'POST':
+        print("hello, method is post")
+        if 'file' not in request.files:
+            print("No file part")
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file.filename == '':
+            print("No selected file")
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            print("file upload success!")
+            output = audio_to_text(filename)
+            print("google stt success!")
+            return output
+            
+    print("GET")
+    # chbot.clear_session()
+
+    return render_template('korean.html')
+
 @app.route('/chat/',methods=('GET', 'POST'))
 def chat():
     if request.method == 'POST':
