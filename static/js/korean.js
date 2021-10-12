@@ -135,7 +135,7 @@ let videoStatus = false;
 let isMobile = navigator.userAgent.match(/iPad|iPod|Android|iPhone/i);
 let isCamera = false;
 
-// 1012 joohaem
+// VIDEO MEDIA STREAM VARIALBES
 const videoTag = document.querySelector(".user-video");
 let videoMediaStream = null;
 let videoRecorder = null;
@@ -157,8 +157,7 @@ check.click(function () {
 });
 
 //web page loaded.
-// 1012 joohaem
-// MediaStream -> MediaRecorder -> chunks 쌓여 -> Blob -> URL -> 녹화 영상
+// MediaStream -> MediaRecorder -> chunks 쌓여 -> Blob -> URL -> POST
 navigator.mediaDevices
   .getUserMedia({ // constraints
     audio: true,
@@ -226,9 +225,9 @@ navigator.mediaDevices
     recorder.connect(context.destination);
   });
   
-// 1012 joohaem
-// const downloadBtn = document.getElementById("download-btn");
+// VIDEO MEDIA STREAM EVENT
 
+// const downloadBtn = document.getElementById("download-btn");
 // downloadBtn.addEventListener("click", function () {
 //   if (recordedVideoURL) {
 //     const link = document.createElement("a");
@@ -283,41 +282,6 @@ const VideoCaptureEnd = () => {
     sendAvi(videoBlob);
   }
 };
-
-const sendAvi = blob => {
-  if (blob == null) {
-    return;
-  }
-  console.log("Post");
-  let filename = new Date().toString() + ".avi";
-  var file = new File([blob], filename);
-
-  var fd = new FormData();
-  fd.append("fname", filename);
-  fd.append("file", file);
-
-  $.ajax({
-    url: "http://localhost:5000/korean/",
-    type: "POST",
-    contentType: false,
-    processData: false,
-    data: fd,
-    success: function (data, textStatus) {
-      console.log(data);
-      if (data != null) {
-        setUserResponse(data);
-        console.log("video capture : ", data, "\n Status:", textStatus);
-        send(data);
-      }
-    },
-    error: function (errorMessage) {
-      setUserResponse("");
-      console.log("Error" + errorMessage);
-    },
-  }).done(function (data) {
-    console.log(data);
-  });
-}
 
 //record_start event occurred
 const RecordStart = () => {
@@ -431,6 +395,41 @@ videoTag.addEventListener("record_start", VideoCaptureStart);
 videoTag.addEventListener("record_end", VideoCaptureEnd);
 audioController.addEventListener("record_start", RecordStart);
 audioController.addEventListener("record_end", RecordEnd);
+
+const sendAvi = blob => {
+  if (blob == null) {
+    return;
+  }
+  console.log("Post");
+  let filename = new Date().toString() + ".avi";
+  var file = new File([blob], filename);
+
+  var fd = new FormData();
+  fd.append("fname", filename);
+  fd.append("file", file);
+
+  $.ajax({
+    url: "http://localhost:5000/korean/",
+    type: "POST",
+    contentType: false,
+    processData: false,
+    data: fd,
+    success: function (data, textStatus) {
+      console.log(data);
+      if (data != null) {
+        setUserResponse(data);
+        console.log("video capture : ", data, "\n Status:", textStatus);
+        send(data);
+      }
+    },
+    error: function (errorMessage) {
+      setUserResponse("");
+      console.log("Error" + errorMessage);
+    },
+  }).done(function (data) {
+    console.log(data);
+  });
+}
 
 function sendWav(blob) {
   if (blob == null) {
