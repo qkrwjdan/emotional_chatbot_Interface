@@ -140,6 +140,7 @@ const videoTag = document.querySelector(".user-video");
 let videoMediaStream = null;
 let videoRecorder = null;
 let recordedVideoURL = null;
+let videoBlob = null;
 
 check.click(function () {
   if (isCamera) {
@@ -226,20 +227,20 @@ navigator.mediaDevices
   });
   
 // 1012 joohaem
-const downloadBtn = document.getElementById("download-btn");
+// const downloadBtn = document.getElementById("download-btn");
 
-downloadBtn.addEventListener("click", function () {
-  if (recordedVideoURL) {
-    const link = document.createElement("a");
-    document.body.appendChild(link);
-    // 녹화된 영상의 URL을 href 속성으로 설정
-    link.href = recordedVideoURL;
-    // 저장할 파일명 설정
-    link.download = "video.mp4";
-    link.click();
-    document.body.removeChild(link);
-  }
-});
+// downloadBtn.addEventListener("click", function () {
+//   if (recordedVideoURL) {
+//     const link = document.createElement("a");
+//     document.body.appendChild(link);
+//     // 녹화된 영상의 URL을 href 속성으로 설정
+//     link.href = recordedVideoURL;
+//     // 저장할 파일명 설정
+//     link.download = "video.mp4";
+//     link.click();
+//     document.body.removeChild(link);
+//   }
+// });
 
 const VideoCaptureStart = () => {
   if(navigator.mediaDevices.getUserMedia && videoStatus) {
@@ -262,8 +263,8 @@ const VideoCaptureStart = () => {
     
     // 3. 녹화 중지 이벤트 핸들러 등록
     videoRecorder.onstop = () => {
-      const blob = new Blob(videoData, {type: "video/webm"});
-      recordedVideoURL = window.URL.createObjectURL(blob);
+      videoBlob = new Blob(videoData, {type: "video/webm"});
+      recordedVideoURL = window.URL.createObjectURL(videoBlob);
     }
     
     // 4. 녹화 시작
@@ -276,8 +277,47 @@ const VideoCaptureEnd = () => {
     videoRecorder.stop();
     videoRecorder = null;
     console.log("video capture end");
+
+    // our final videoBlob
+    // videoBlob = new Blob(videoData, { type: "video/webm" });
+    sendAvi(videoBlob);
   }
 };
+
+const sendAvi = blob => {
+  if (blob == null) {
+    return;
+  }
+  console.log("Post");
+  let filename = new Date().toString() + ".avi";
+  var file = new File([blob], filename);
+
+  var fd = new FormData();
+  fd.append("fname", filename);
+  fd.append("file", file);
+
+  $.ajax({
+    url: "http://localhost:5000/korean/",
+    type: "POST",
+    contentType: false,
+    processData: false,
+    data: fd,
+    success: function (data, textStatus) {
+      console.log(data);
+      if (data != null) {
+        setUserResponse(data);
+        console.log("video capture : ", data, "\n Status:", textStatus);
+        send(data);
+      }
+    },
+    error: function (errorMessage) {
+      setUserResponse("");
+      console.log("Error" + errorMessage);
+    },
+  }).done(function (data) {
+    console.log(data);
+  });
+}
 
 //record_start event occurred
 const RecordStart = () => {
