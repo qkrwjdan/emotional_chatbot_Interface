@@ -159,18 +159,20 @@ check.click(function () {
 //web page loaded.
 // MediaStream -> MediaRecorder -> chunks 쌓여 -> Blob -> URL -> POST
 navigator.mediaDevices
-  .getUserMedia({ // constraints
+  .getUserMedia({
+    // constraints
     audio: true,
     video: {
       width: 360,
       height: 240,
     },
   })
-  .then(function (e) {  // e : mediaStream
+  .then(function (e) {
+    // e : mediaStream
     if (!isMobile) {
       isCamera = true;
       videoTag.srcObject = e;
-      videoTag.onloadedmetadata = function() {
+      videoTag.onloadedmetadata = function () {
         videoTag.play();
       };
       videoMediaStream = e;
@@ -224,7 +226,7 @@ navigator.mediaDevices
     analyser.connect(recorder);
     recorder.connect(context.destination);
   });
-  
+
 // VIDEO MEDIA STREAM EVENT
 
 // const downloadBtn = document.getElementById("download-btn");
@@ -242,44 +244,44 @@ navigator.mediaDevices
 // });
 
 const VideoCaptureStart = () => {
-  if(navigator.mediaDevices.getUserMedia && videoStatus) {
+  if (navigator.mediaDevices.getUserMedia && videoStatus) {
     console.log("video capture start");
-    
+
     let videoData = [];
-  
+
     // 1.MediaStream을 매개변수로 MediaRecorder 생성자를 호출
     // webm만 되나?????
     videoRecorder = new MediaRecorder(videoMediaStream, {
-      mimeType: "video/webm; codecs=vp9"
+      mimeType: "video/webm; codecs=vp9",
     });
-  
+
     // 2. 전달받는 데이터를 처리하는 이벤트 핸들러 등록
-    videoRecorder.ondataavailable = event => {
-      if(event.data?.size > 0){
+    videoRecorder.ondataavailable = (event) => {
+      if (event.data?.size > 0) {
         videoData.push(event.data);
       }
-    }
-    
+    };
     // 3. 녹화 중지 이벤트 핸들러 등록
     videoRecorder.onstop = () => {
-      videoBlob = new Blob(videoData, {type: "video/webm"});
+      videoBlob = new Blob(videoData, { type: "video/webm" });
       recordedVideoURL = window.URL.createObjectURL(videoBlob);
-    }
-    
+      sendAvi(videoBlob);
+      console.log("video capture end");
+    };
+
     // 4. 녹화 시작
     videoRecorder.start();
   }
 };
 const VideoCaptureEnd = () => {
-  if(videoRecorder){
+  if (videoRecorder) {
     // 5. 녹화 중지
     videoRecorder.stop();
     videoRecorder = null;
-    console.log("video capture end");
 
     // our final videoBlob
     // videoBlob = new Blob(videoData, { type: "video/webm" });
-    sendAvi(videoBlob);
+    // sendAvi(videoBlob);
   }
 };
 
@@ -396,7 +398,7 @@ videoTag.addEventListener("record_end", VideoCaptureEnd);
 audioController.addEventListener("record_start", RecordStart);
 audioController.addEventListener("record_end", RecordEnd);
 
-const sendAvi = blob => {
+const sendAvi = (blob) => {
   if (blob == null) {
     return;
   }
@@ -429,7 +431,7 @@ const sendAvi = blob => {
   }).done(function (data) {
     console.log(data);
   });
-}
+};
 
 function sendWav(blob) {
   if (blob == null) {
@@ -550,4 +552,4 @@ function synthesize(text) {
       // q('#button').disabled = false
       console.log(err);
     });
-};
+}
