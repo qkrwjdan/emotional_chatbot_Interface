@@ -53,7 +53,7 @@ def audio_to_text(filename):
 app = Flask(__name__)
 
 UPLOAD_FOLDER = 'uploads/'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif','wav'}
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif','wav', 'avi'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -108,9 +108,9 @@ def korean():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             print("file upload success!")
-            output = audio_to_text(filename)
+            # output = audio_to_text(filename)
             print("google stt success!")
-            return output
+            return "success"
             
     print("GET")
     # chbot.clear_session()
