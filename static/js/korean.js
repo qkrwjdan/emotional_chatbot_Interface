@@ -142,6 +142,11 @@ let videoRecorder = null;
 let recordedVideoURL = null;
 let videoBlob = null;
 
+// POST of files (record & video)
+let flagRecord = false;
+let flagVideo = false;
+let recordNVideo = [];
+
 check.click(function () {
   if (isCamera) {
     $("p").toggle();
@@ -265,7 +270,7 @@ const VideoCaptureStart = () => {
     videoRecorder.onstop = () => {
       videoBlob = new Blob(videoData, { type: "video/webm" });
       recordedVideoURL = window.URL.createObjectURL(videoBlob);
-      sendAvi(videoBlob);
+      sendFiles(videoBlob, "video");
       console.log("video capture end");
     };
 
@@ -359,7 +364,7 @@ const RecordEnd = () => {
   // our final blob
   blob = new Blob([view], { type: "audio/wav" });
 
-  sendWav(blob);
+  sendFiles(blob, "record");
 
   //reset channel
   leftchannel.length = 0;
@@ -398,75 +403,144 @@ videoTag.addEventListener("record_end", VideoCaptureEnd);
 audioController.addEventListener("record_start", RecordStart);
 audioController.addEventListener("record_end", RecordEnd);
 
-const sendAvi = (blob) => {
-  if (blob == null) {
-    return;
+const sendFiles = (blob, filetype) => {
+  switch(filetype) {
+    case "record":
+      if (blob == null)
+        return;
+
+      const filename = new Date().toString() + ".wav";
+      const file = new File([blob], filename);
+    
+      let fd = new FormData();
+      fd.append("fname", filename);
+      fd.append("file", file);
+
+      recordNVideo[0] = fd;
+      flagRecord = true;
+
+      break;
+    
+    case "video":
+      if (blob == null)
+        return;
+        
+      const filename = new Date().toString() + ".avi";
+      const file = new File([blob], filename);
+    
+      let fd = new FormData();
+      fd.append("fname", filename);
+      fd.append("file", file);
+
+      recordNVideo[1] = fd;
+      flagRecord = true;
+
+      break;
+    
+    default:
+      return;
   }
+
+
   console.log("Post");
-  let filename = new Date().toString() + ".avi";
-  var file = new File([blob], filename);
-
-  var fd = new FormData();
-  fd.append("fname", filename);
-  fd.append("file", file);
-
-  $.ajax({
-    url: "http://localhost:5000/korean/",
-    type: "POST",
-    contentType: false,
-    processData: false,
-    data: fd,
-    success: function (data, textStatus) {
+  if(flagRecord && flagVideo) {
+    // 배열 POST
+    $.ajax({
+      url: "http://localhost:5000/korean/",
+      type: "POST",
+      contentType: false,
+      processData: false,
+      data: recordNVideo,
+      success: function (data, textStatus) {
+        console.log(data);
+        if (data != null) {
+          setUserResponse(data);
+          console.log("record and video capture : ", data, "\n Status:", textStatus);
+          send(data);
+        }
+      },
+      error: function (errorMessage) {
+        setUserResponse("");
+        console.log("Error" + errorMessage);
+      },
+    }).done(function (data) {
       console.log(data);
-      if (data != null) {
-        setUserResponse(data);
-        console.log("video capture : ", data, "\n Status:", textStatus);
-        send(data);
-      }
-    },
-    error: function (errorMessage) {
-      setUserResponse("");
-      console.log("Error" + errorMessage);
-    },
-  }).done(function (data) {
-    console.log(data);
-  });
-};
+    });
 
-function sendWav(blob) {
-  if (blob == null) {
-    return;
+    flagRecord = false;
+    flagVideo = false;
   }
-  console.log("Post");
-  let filename = new Date().toString() + ".wav";
-  var file = new File([blob], filename);
-
-  var fd = new FormData();
-  fd.append("fname", filename);
-  fd.append("file", file);
-
-  $.ajax({
-    url: "http://localhost:5000/korean/",
-    type: "POST",
-    contentType: false,
-    processData: false,
-    data: fd,
-    success: function (data, textStatus) {
-      console.log(data);
-      if (data != null) {
-        setUserResponse(data);
-        console.log("google STT : ", data, "\n Status:", textStatus);
-        send(data);
-      }
-    },
-    error: function (errorMessage) {
-      setUserResponse("");
-      console.log("Error" + errorMessage);
-    },
-  }).done(function (data) {
-    console.log(data);
-  });
 }
+
+// const sendAvi = (blob) => {
+//   if (blob == null) {
+//     return;
+//   }
+//   console.log("Post");
+//   let filename = new Date().toString() + ".avi";
+//   var file = new File([blob], filename);
+
+//   var fd = new FormData();
+//   fd.append("fname", filename);
+//   fd.append("file", file);
+
+//   $.ajax({
+//     url: "http://localhost:5000/korean/",
+//     type: "POST",
+//     contentType: false,
+//     processData: false,
+//     data: fd,
+//     success: function (data, textStatus) {
+//       console.log(data);
+//       if (data != null) {
+//         setUserResponse(data);
+//         console.log("video capture : ", data, "\n Status:", textStatus);
+//         send(data);
+//       }
+//     },
+//     error: function (errorMessage) {
+//       setUserResponse("");
+//       console.log("Error" + errorMessage);
+//     },
+//   }).done(function (data) {
+//     console.log(data);
+//   });
+// };
+
+// function sendWav(blob) {
+//   if (blob == null) {
+//     return;
+//   }
+//   console.log("Post");
+//   let filename = new Date().toString() + ".wav";
+//   var file = new File([blob], filename);
+
+//   var fd = new FormData();
+//   fd.append("fname", filename);
+//   fd.append("file", file);
+
+//   $.ajax({
+//     url: "http://localhost:5000/korean/",
+//     type: "POST",
+//     contentType: false,
+//     processData: false,
+//     data: fd,
+//     success: function (data, textStatus) {
+//       console.log(data);
+//       if (data != null) {
+//         setUserResponse(data);
+//         console.log("google STT : ", data, "\n Status:", textStatus);
+//         send(data);
+//       }
+//     },
+//     error: function (errorMessage) {
+//       setUserResponse("");
+//       console.log("Error" + errorMessage);
+//     },
+//   }).done(function (data) {
+//     console.log(data);
+//   });
+// }
 
 function flattenArray(channelBuffer, recordingLen) {
   var result = new Float32Array(recordingLen);
