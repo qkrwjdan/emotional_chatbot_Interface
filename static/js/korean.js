@@ -143,6 +143,9 @@ let recordedVideoURL = null;
 let videoBlob = null;
 
 // POST of files (record & video)
+let fileNameSending = null;
+let filename = null;
+let fileDataSending = null;
 let flagRecord = false;
 let flagVideo = false;
 let recordNVideo = [];
@@ -404,46 +407,43 @@ audioController.addEventListener("record_start", RecordStart);
 audioController.addEventListener("record_end", RecordEnd);
 
 const sendFiles = (blob, filetype) => {
-  switch(filetype) {
+  switch (filetype) {
     case "record":
-      if (blob == null)
-        return;
+      if (blob == null) return;
 
-      const filename = new Date().toString() + ".wav";
-      const file = new File([blob], filename);
-    
-      let fd = new FormData();
-      fd.append("fname", filename);
-      fd.append("file", file);
+      fileNameSending = new Date().toString() + ".wav";
+      fileSending = new File([blob], fileNameSending);
 
-      recordNVideo[0] = fd;
+      fileDataSending = new FormData();
+      fileDataSending.append("fname", fileNameSending);
+      fileDataSending.append("file", fileSending);
+
+      recordNVideo[0] = fileDataSending;
       flagRecord = true;
 
       break;
-    
+
     case "video":
-      if (blob == null)
-        return;
-        
-      const filename = new Date().toString() + ".avi";
-      const file = new File([blob], filename);
-    
-      let fd = new FormData();
-      fd.append("fname", filename);
-      fd.append("file", file);
+      if (blob == null) return;
 
-      recordNVideo[1] = fd;
+      fileNameSending = new Date().toString() + ".avi";
+      fileSending = new File([blob], fileNameSending);
+
+      fileDataSending = new FormData();
+      fileDataSending.append("fname", fileNameSending);
+      fileDataSending.append("file", fileSending);
+
+      recordNVideo[1] = fileDataSending;
       flagRecord = true;
 
       break;
-    
+
     default:
-      return;
+      console.log("[sendFiles] What case is this file?");
   }
 
-
   console.log("Post");
-  if(flagRecord && flagVideo) {
+  if (flagRecord && flagVideo) {
     // 배열 POST
     $.ajax({
       url: "http://localhost:5000/korean/",
@@ -455,7 +455,12 @@ const sendFiles = (blob, filetype) => {
         console.log(data);
         if (data != null) {
           setUserResponse(data);
-          console.log("record and video capture : ", data, "\n Status:", textStatus);
+          console.log(
+            "record and video capture : ",
+            data,
+            "\n Status:",
+            textStatus
+          );
           send(data);
         }
       },
@@ -470,7 +475,7 @@ const sendFiles = (blob, filetype) => {
     flagRecord = false;
     flagVideo = false;
   }
-}
+};
 
 // const sendAvi = (blob) => {
 //   if (blob == null) {
