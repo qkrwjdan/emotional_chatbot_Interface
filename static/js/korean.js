@@ -143,12 +143,9 @@ let recordedVideoURL = null;
 let videoBlob = null;
 
 // POST of files (record & video)
-let fileNameSending = null;
-let filename = null;
 let fileDataSending = null;
 let flagRecord = false;
 let flagVideo = false;
-let recordNVideo = [];
 
 check.click(function () {
   if (isCamera) {
@@ -411,14 +408,13 @@ const sendFiles = (blob, filetype) => {
     case "record":
       if (blob == null) return;
 
-      fileNameSending = new Date().toString() + ".wav";
-      fileSending = new File([blob], fileNameSending);
+      const recordNameSending = new Date().toString() + ".wav";
+      const recordSending = new File([blob], recordNameSending);
 
-      fileDataSending = new FormData();
-      fileDataSending.append("fname", fileNameSending);
-      fileDataSending.append("file", fileSending);
+      if (flagVideo === false) fileDataSending = new FormData();
+      fileDataSending.append("rname", recordNameSending);
+      fileDataSending.append("rfile", recordSending);
 
-      recordNVideo[0] = fileDataSending;
       flagRecord = true;
 
       break;
@@ -426,15 +422,14 @@ const sendFiles = (blob, filetype) => {
     case "video":
       if (blob == null) return;
 
-      fileNameSending = new Date().toString() + ".avi";
-      fileSending = new File([blob], fileNameSending);
+      const videoNameSending = new Date().toString() + ".avi";
+      const videoSending = new File([blob], videoNameSending);
 
-      fileDataSending = new FormData();
-      fileDataSending.append("fname", fileNameSending);
-      fileDataSending.append("file", fileSending);
+      if (flagRecord === false) fileDataSending = new FormData();
+      fileDataSending.append("vname", videoNameSending);
+      fileDataSending.append("vfile", videoSending);
 
-      recordNVideo[1] = fileDataSending;
-      flagRecord = true;
+      flagVideo = true;
 
       break;
 
@@ -442,15 +437,20 @@ const sendFiles = (blob, filetype) => {
       console.log("[sendFiles] What case is this file?");
   }
 
-  console.log("Post");
   if (flagRecord && flagVideo) {
-    // 배열 POST
+    // for (var key of fileDataSending.keys()) {
+    //   console.log(key);
+    // }
+
+    // for (var value of fileDataSending.values()) {
+    //   console.log(value);
+    // }
     $.ajax({
       url: "http://localhost:5000/korean/",
       type: "POST",
       contentType: false,
       processData: false,
-      data: recordNVideo,
+      data: fileDataSending,
       success: function (data, textStatus) {
         console.log(data);
         if (data != null) {
@@ -466,14 +466,14 @@ const sendFiles = (blob, filetype) => {
       },
       error: function (errorMessage) {
         setUserResponse("");
-        console.log("Error" + errorMessage);
+        console.log("Error :" + errorMessage);
       },
     }).done(function (data) {
       console.log(data);
+      flagRecord = false;
+      flagVideo = false;
+      console.log("Post");
     });
-
-    flagRecord = false;
-    flagVideo = false;
   }
 };
 
