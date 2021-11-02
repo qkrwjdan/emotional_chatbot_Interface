@@ -232,61 +232,36 @@ $(".usrInput").on("keyup keypress", function (e) {
       recorder.connect(context.destination);
     });
   
-  // VIDEO MEDIA STREAM EVENT
-  
-  // const downloadBtn = document.getElementById("download-btn");
-  // downloadBtn.addEventListener("click", function () {
-  //   if (recordedVideoURL) {
-  //     const link = document.createElement("a");
-  //     document.body.appendChild(link);
-  //     // 녹화된 영상의 URL을 href 속성으로 설정
-  //     link.href = recordedVideoURL;
-  //     // 저장할 파일명 설정
-  //     link.download = "video.mp4";
-  //     link.click();
-  //     document.body.removeChild(link);
-  //   }
-  // });
-  
   const VideoCaptureStart = () => {
     if (navigator.mediaDevices.getUserMedia && videoStatus) {
       console.log("video capture start");
   
       let videoData = [];
   
-      // 1.MediaStream을 매개변수로 MediaRecorder 생성자를 호출
-      // webm만 되나?????
       videoRecorder = new MediaRecorder(videoMediaStream, {
         mimeType: "video/webm; codecs=vp9",
       });
   
-      // 2. 전달받는 데이터를 처리하는 이벤트 핸들러 등록
       videoRecorder.ondataavailable = (event) => {
         if (event.data?.size > 0) {
           videoData.push(event.data);
         }
       };
-      // 3. 녹화 중지 이벤트 핸들러 등록
+
       videoRecorder.onstop = () => {
         videoBlob = new Blob(videoData, { type: "video/webm" });
         recordedVideoURL = window.URL.createObjectURL(videoBlob);
         sendFiles(videoBlob, "video");
         console.log("video capture end");
       };
-  
-      // 4. 녹화 시작
+
       videoRecorder.start();
     }
   };
   const VideoCaptureEnd = () => {
     if (videoRecorder) {
-      // 5. 녹화 중지
       videoRecorder.stop();
       videoRecorder = null;
-  
-      // our final videoBlob
-      // videoBlob = new Blob(videoData, { type: "video/webm" });
-      // sendAvi(videoBlob);
     }
   };
   
@@ -438,13 +413,6 @@ $(".usrInput").on("keyup keypress", function (e) {
     }
   
     if (flagRecord && flagVideo) {
-      // for (var key of fileDataSending.keys()) {
-      //   console.log(key);
-      // }
-  
-      // for (var value of fileDataSending.values()) {
-      //   console.log(value);
-      // }
       $.ajax({
         url: "http://localhost:5000/korean_mic/",
         type: "POST",
@@ -476,76 +444,6 @@ $(".usrInput").on("keyup keypress", function (e) {
       });
     }
   };
-  
-  // const sendAvi = (blob) => {
-  //   if (blob == null) {
-  //     return;
-  //   }
-  //   console.log("Post");
-  //   let filename = new Date().toString() + ".avi";
-  //   var file = new File([blob], filename);
-  
-  //   var fd = new FormData();
-  //   fd.append("fname", filename);
-  //   fd.append("file", file);
-  
-  //   $.ajax({
-  //     url: "http://localhost:5000/korean/",
-  //     type: "POST",
-  //     contentType: false,
-  //     processData: false,
-  //     data: fd,
-  //     success: function (data, textStatus) {
-  //       console.log(data);
-  //       if (data != null) {
-  //         setUserResponse(data);
-  //         console.log("video capture : ", data, "\n Status:", textStatus);
-  //         send(data);
-  //       }
-  //     },
-  //     error: function (errorMessage) {
-  //       setUserResponse("");
-  //       console.log("Error" + errorMessage);
-  //     },
-  //   }).done(function (data) {
-  //     console.log(data);
-  //   });
-  // };
-  
-  // function sendWav(blob) {
-  //   if (blob == null) {
-  //     return;
-  //   }
-  //   console.log("Post");
-  //   let filename = new Date().toString() + ".wav";
-  //   var file = new File([blob], filename);
-  
-  //   var fd = new FormData();
-  //   fd.append("fname", filename);
-  //   fd.append("file", file);
-  
-  //   $.ajax({
-  //     url: "http://localhost:5000/korean/",
-  //     type: "POST",
-  //     contentType: false,
-  //     processData: false,
-  //     data: fd,
-  //     success: function (data, textStatus) {
-  //       console.log(data);
-  //       if (data != null) {
-  //         setUserResponse(data);
-  //         console.log("google STT : ", data, "\n Status:", textStatus);
-  //         send(data);
-  //       }
-  //     },
-  //     error: function (errorMessage) {
-  //       setUserResponse("");
-  //       console.log("Error" + errorMessage);
-  //     },
-  //   }).done(function (data) {
-  //     console.log(data);
-  //   });
-  // }
   
   function flattenArray(channelBuffer, recordingLen) {
     var result = new Float32Array(recordingLen);

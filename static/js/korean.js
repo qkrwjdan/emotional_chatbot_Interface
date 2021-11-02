@@ -438,13 +438,6 @@ const sendFiles = (blob, filetype) => {
   }
 
   if (flagRecord && flagVideo) {
-    // for (var key of fileDataSending.keys()) {
-    //   console.log(key);
-    // }
-
-    // for (var value of fileDataSending.values()) {
-    //   console.log(value);
-    // }
     $.ajax({
       url: "http://localhost:5000/korean/",
       type: "POST",
@@ -476,76 +469,6 @@ const sendFiles = (blob, filetype) => {
     });
   }
 };
-
-// const sendAvi = (blob) => {
-//   if (blob == null) {
-//     return;
-//   }
-//   console.log("Post");
-//   let filename = new Date().toString() + ".avi";
-//   var file = new File([blob], filename);
-
-//   var fd = new FormData();
-//   fd.append("fname", filename);
-//   fd.append("file", file);
-
-//   $.ajax({
-//     url: "http://localhost:5000/korean/",
-//     type: "POST",
-//     contentType: false,
-//     processData: false,
-//     data: fd,
-//     success: function (data, textStatus) {
-//       console.log(data);
-//       if (data != null) {
-//         setUserResponse(data);
-//         console.log("video capture : ", data, "\n Status:", textStatus);
-//         send(data);
-//       }
-//     },
-//     error: function (errorMessage) {
-//       setUserResponse("");
-//       console.log("Error" + errorMessage);
-//     },
-//   }).done(function (data) {
-//     console.log(data);
-//   });
-// };
-
-// function sendWav(blob) {
-//   if (blob == null) {
-//     return;
-//   }
-//   console.log("Post");
-//   let filename = new Date().toString() + ".wav";
-//   var file = new File([blob], filename);
-
-//   var fd = new FormData();
-//   fd.append("fname", filename);
-//   fd.append("file", file);
-
-//   $.ajax({
-//     url: "http://localhost:5000/korean/",
-//     type: "POST",
-//     contentType: false,
-//     processData: false,
-//     data: fd,
-//     success: function (data, textStatus) {
-//       console.log(data);
-//       if (data != null) {
-//         setUserResponse(data);
-//         console.log("google STT : ", data, "\n Status:", textStatus);
-//         send(data);
-//       }
-//     },
-//     error: function (errorMessage) {
-//       setUserResponse("");
-//       console.log("Error" + errorMessage);
-//     },
-//   }).done(function (data) {
-//     console.log(data);
-//   });
-// }
 
 function flattenArray(channelBuffer, recordingLen) {
   var result = new Float32Array(recordingLen);

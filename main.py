@@ -134,7 +134,7 @@ def korean_mic():
                 filename = secure_filename(wavFile.filename)
                 wavFile.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-                text = audio_to_text(filename)
+                text = audio_to_text(filename,languageCode = 'ko-KR')
 
                 return text
         
