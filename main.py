@@ -10,7 +10,7 @@ import time
 
 # chbot = gpt2()
 
-def audio_to_text(filename):
+def audio_to_text(filename, languageCode = 'en-US'):
     # [START speech_quickstart]
     import io
 
@@ -40,7 +40,7 @@ def audio_to_text(filename):
     config = speech.RecognitionConfig(
         encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
         sample_rate_hertz=44100,
-        language_code='en-US',
+        language_code=languageCode,
         audio_channel_count=2,
         enable_separate_recognition_per_channel=True
         )
@@ -117,29 +117,28 @@ def korean():
 
     return render_template('korean.html')
 
-@app.route('/korean_mic/',methods=('GET','POT'))
+@app.route('/korean_mic/',methods=('GET','POST'))
 def korean_mic():
     if request.method == 'POST':
         print("hello, method is post")
 
+        if 'vfile' in request.files:
+            aviFile = request.files['vfile']
+            if aviFile and allowed_file(aviFile.filename):
+                filename = secure_filename(aviFile.filename)
+                aviFile.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            
+        if 'rfile' in request.files:
+            wavFile = request.files['rfile']
+            if wavFile and allowed_file(wavFile.filename):
+                filename = secure_filename(wavFile.filename)
+                wavFile.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
+                text = audio_to_text(filename)
 
-        if 'file' not in request.files:
-            print("No file part")
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        if file.filename == '':
-            print("No selected file")
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            print("file upload success!")
-            # output = audio_to_text(filename)
-            print("google stt success!")
-            return "success"
+                return text
+        
+        return "오류가 발생했습니다."
             
     print("GET")
 

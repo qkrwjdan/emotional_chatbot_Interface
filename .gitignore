@@ -2,3 +2,4 @@ venv/
 .wav
 Lee_STT.json
 uploads/
+key.json
