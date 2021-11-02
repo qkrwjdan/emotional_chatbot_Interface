@@ -149,7 +149,7 @@ let flagVideo = false;
 
 check.click(function () {
   if (isCamera) {
-    $("p").toggle();
+    $(".switch-text").toggle();
 
     if (videoStatus == false) {
       videoStatus = true;

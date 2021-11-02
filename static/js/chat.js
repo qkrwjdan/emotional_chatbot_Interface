@@ -144,7 +144,7 @@ if (!isMobile) {
 
 check.click(function () {
   if (isCamera) {
-    $("p").toggle();
+    $(".switch-text").toggle();
     let videoTag = document.getElementsByClassName("user-video")[0];
 
     if (videoStatus == false) {

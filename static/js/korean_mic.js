@@ -149,7 +149,7 @@ $(".usrInput").on("keyup keypress", function (e) {
   
   check.click(function () {
     if (isCamera) {
-      $("p").toggle();
+      $(".switch-text").toggle();
   
       if (videoStatus == false) {
         videoStatus = true;

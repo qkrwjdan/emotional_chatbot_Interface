@@ -138,7 +138,7 @@ isMobile = navigator.userAgent.match(/iPad|iPod|Android|iPhone/i);
 
 check.click(function () {
   if (isCamera) {
-    $("p").toggle();
+    $(".switch-text").toggle();
     let videoTag = document.getElementsByClassName("user-video")[0];
 
     if (videoStatus == false) {

@@ -121,6 +121,7 @@ def korean():
 def korean_mic():
     if request.method == 'POST':
         print("hello, method is post")
+        print(request.files)
 
         if 'vfile' in request.files:
             aviFile = request.files['vfile']
