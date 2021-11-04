@@ -110,6 +110,16 @@ function colorPids(vol) {
   }
 }
 
+// ------------------------------------------ Question Box -----------------------------------------------
+const questionMark = document.querySelector(".question");
+const questionBox = document.querySelector(".question-text");
+const initQuestion = () => {
+  questionMark.addEventListener("click", () =>
+    questionBox.classList.toggle("active")
+  );
+};
+initQuestion();
+
 // audio recording
 
 var audioController = document.getElementById("audioController");
@@ -438,6 +448,13 @@ const sendFiles = (blob, filetype) => {
   }
 
   if (flagRecord && flagVideo) {
+    for (var key of fileDataSending.keys()) {
+      console.log(key);
+    }
+
+    for (var value of fileDataSending.values()) {
+      console.log(value);
+    }
     $.ajax({
       url: "http://localhost:5000/korean/",
       type: "POST",
