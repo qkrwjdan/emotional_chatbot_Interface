@@ -11,6 +11,7 @@ $(".usrInput").on("keyup keypress", function (e) {
       setUserResponse(text);
       send(text);
       e.preventDefault();
+      $(".usrInput").focus();
       return false;
     }
   }
