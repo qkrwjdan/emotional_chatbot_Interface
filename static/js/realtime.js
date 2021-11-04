@@ -110,6 +110,16 @@ function colorPids(vol) {
   }
 }
 
+// ------------------------------------------ Question Box -----------------------------------------------
+const questionMark = document.querySelector(".question");
+const questionBox = document.querySelector(".question-text");
+const initQuestion = () => {
+  questionMark.addEventListener("click", () =>
+    questionBox.classList.toggle("active")
+  );
+};
+initQuestion();
+
 // audio recording
 
 var audioController = document.getElementById("audioController");

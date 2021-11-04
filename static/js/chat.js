@@ -120,18 +120,17 @@ if (!isMobile) {
     .getUserMedia({
       video: {
         width: 360,
-        height: 240
+        height: 240,
       },
     })
     .then(function (mediaStream) {
-			isCamera = true;
+      isCamera = true;
 
-			isMobile = true;
-			videoTag.srcObject = mediaStream;
-			videoTag.onloadedmetadata = function (e) {
-				videoTag.play();
-			}
-      
+      isMobile = true;
+      videoTag.srcObject = mediaStream;
+      videoTag.onloadedmetadata = function (e) {
+        videoTag.play();
+      };
     })
     .catch(function (err) {
       console.log(err.name + ": " + err.message);
@@ -150,10 +149,19 @@ check.click(function () {
     if (videoStatus == false) {
       videoStatus = true;
       videoTag.style.display = "inline";
-
     } else {
       videoStatus = false;
       videoTag.style.display = "none";
     }
   }
 });
+
+// ------------------------------------------ Question Box -----------------------------------------------
+const questionMark = document.querySelector(".question");
+const questionBox = document.querySelector(".question-text");
+const initQuestion = () => {
+  questionMark.addEventListener("click", () =>
+    questionBox.classList.toggle("active")
+  );
+};
+initQuestion();
