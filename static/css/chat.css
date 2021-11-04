@@ -136,7 +136,7 @@ div.chats::-webkit-scrollbar-thumb:hover {
   animation-iteration-count: 1;
   margin-top: 15px;
   word-wrap: break-word;
-  padding-: 0.6em 1em;
+  padding: 0.6em 1em;
   float: right;
   margin-right: 0.5em;
   border: 1px solid #6072e6;
@@ -201,7 +201,7 @@ div.chats::-webkit-scrollbar-thumb:hover {
 @keyframes animatebox {
   0% {
     opacity: 0;
-    transform: translate(0px, 10-px);
+    transform: translate(0px, -10px);
   }
   100% {
     opacity: 1;
@@ -301,10 +301,10 @@ input::placeholder {
   z-index: 5;
   background-color: white;
   cursor: default;
-  animation: animatebox ease-in-out 0.5s;
+  animation: animateQuestion ease-in-out 0.5s;
 }
 
-@keyframes animatebox {
+@keyframes animateQuestion {
   0% {
     opacity: 0;
     transform: translate(5px, -10px);
