@@ -326,8 +326,8 @@ input::placeholder {
   align-items: center;
 }
 
-@media screen and (max-width: 768px),
-  screen and (max-height: 768px) and (orientation: landscape) {
+@media screen and (max-width: 480px),
+  screen and (max-height: 480px) and (orientation: landscape) {
   .container {
     flex-direction: column-reverse;
     justify-content: space-around;
