@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ChatBot</title>
+    <!--Import Google Icon Font-->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!--Import materialize.css-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static',filename='css/chat.css')}}"
+    />
+    <!--Main css-->
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/materialize.min.css')}}"> -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/ab9bbc0a6d.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <header class="header">
+        <!-- header -->
+        <nav class="nav-wrapper">
+          <a class="back" href="/">
+            <i class="fas fa-chevron-left" id="refresh-icon"></i>
+          </a>
+          <div class="nav-inner">
+            <div class="question">
+               <i class="fas fa-question"></i>
+               <p class="question-text">
+                  Type a message.
+                  <br>
+                  Then press "Enter" or click the send button.
+               </p>
+            </div>
+            <a class="refresh" href="/chat">
+               <i class="fas fa-redo"></i>
+            </a>
+         </div>
+        </nav>
+      </header>
+      <div class="container">
+        <section class="center-area">
+          <div class="chat_header"></div>
+
+          <div class="chats" id="chats"></div>
+
+          <div class="chat-footer">
+            <div class="keypad">
+              <input
+                type="text"
+                id="keypad"
+                class="usrInput browser-default"
+                placeholder="Type a message and Press 'Enter' key..."
+                autocomplete="off"
+              />
+            </div>
+            <div class="send-wrapper">
+              <button class="send"><i class="fas fa-paper-plane"></i></button>
+            </div>
+          </div>
+        </section>
+        <section class="right-area">
+          <div class="card">
+            <img
+              id="chbot-character-img"
+              class="chbot-img"
+              src="{{ url_for('static',filename='img/botAvatar.png')}}"
+              alt="chatbot logo"
+            />
+            <h1 class="intro">Hi I'm ChatBot!</h1>
+            <div class="description">
+              <div class="box-wrap">
+                <div class="image-box">
+                  <video controls autoplay src="" class="user-video" onerror="this.style.display='none'">
+                </div>
+                <div class="switch-box">
+                  <label class="switch">
+                    <input type="checkbox" />
+                    <span class="slider round"></span>
+                  </label>
+                  <p class="switch-text">OFF</p>
+                  <p class="switch-text" style="display: none">ON</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static',filename='js/materialize.min.js')}}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static',filename='js/ui.js')}}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static',filename='js/setCamera.js')}}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static',filename='js/send.js')}}"
+    ></script> 
+  </body>
+</html>
