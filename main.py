@@ -11,8 +11,6 @@ ENG_CHATBOT_URL = os.environ.get("ENG_CHATBOT_URL")
 
 
 def send_message_to_eng_chatbot(input_text):
-    print(ENG_CHATBOT_URL)
-    print(os.environ)
     headers = {'Content-Type': 'application/json; charset=utf-8'}
     contents = {
         'message': input_text,
@@ -32,9 +30,7 @@ def send_message_to_eng_chatbot(input_text):
 def english():
     if request.method == 'POST':
         input_text = request.json['message']
-        print(input_text)
         answer = send_message_to_eng_chatbot(input_text)
-        print('answer : ', answer)
         context = {'text': answer, 'recipient_id': request.json['sender']}
         return context
 
