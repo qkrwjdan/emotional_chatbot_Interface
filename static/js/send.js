@@ -1,5 +1,5 @@
-const englishChatbotServerUrl = "http://localhost:3000/english";
-const koreanChatbotServerUrl = "http://localhost:3000/korean";
+const englishChatbotServerUrl = "http://echatbot.site/english";
+const koreanChatbotServerUrl = "http://echatbot.site/korean";
 
 function send(message) {
   $("#audio").attr("hidden", true);
