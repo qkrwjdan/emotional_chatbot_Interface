@@ -10,11 +10,11 @@ app = Flask(__name__)
 ENG_CHATBOT_URL = os.environ.get("ENG_CHATBOT_URL")
 
 
-def send_message_to_eng_chatbot(input_text):
+def send_message_to_eng_chatbot(input_text, sender):
     headers = {'Content-Type': 'application/json; charset=utf-8'}
     contents = {
         'message': input_text,
-        'sender': "test"
+        'sender': sender
     }
 
     gpt2_res = requests.post(
@@ -30,7 +30,8 @@ def send_message_to_eng_chatbot(input_text):
 def english():
     if request.method == 'POST':
         input_text = request.json['message']
-        answer = send_message_to_eng_chatbot(input_text)
+        sender = request.json['id']
+        answer = send_message_to_eng_chatbot(input_text, sender)
         context = {'text': answer, 'recipient_id': request.json['sender']}
         return context
 
