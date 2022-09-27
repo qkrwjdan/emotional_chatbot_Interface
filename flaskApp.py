@@ -30,7 +30,7 @@ def send_message_to_eng_chatbot(input_text, sender):
 def english():
     if request.method == 'POST':
         input_text = request.json['message']
-        sender = request.json['id']
+        sender = request.json['sender']
         answer = send_message_to_eng_chatbot(input_text, sender)
         context = {'text': answer, 'recipient_id': request.json['sender']}
         return context
@@ -56,4 +56,4 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=3000, debug=True, threaded=False)
+    app.run(host='0.0.0.0', port=5000, debug=True, threaded=False)
