@@ -9,10 +9,6 @@ function callTimer() {
   min = parseInt(timeLimit / 60);
   sec = parseInt(timeLimit % 60);
 
-  const displayTime =
-    min.toString().padStart(2, "0") + " : " + sec.toString().padStart(2, "0");
-  console.log(displayTime);
-
   timeLimit -= 1;
 
   if (timeLimit < -1) {
