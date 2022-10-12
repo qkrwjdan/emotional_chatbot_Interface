@@ -1,5 +1,5 @@
-const englishChatbotServerUrl = "http://echatbot.site/english";
-const koreanChatbotServerUrl = "http://echatbot.site/korean";
+const englishChatbotServerUrl = "https://echatbot.site/english";
+const koreanChatbotServerUrl = "https://echatbot.site/korean";
 
 function uuidv4() {
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
@@ -12,6 +12,12 @@ function uuidv4() {
 let id = uuidv4();
 
 function send(message) {
+  if (timeLimit <= -1) {
+    setBotResponse({ text: "session is ended." });
+    return;
+  }
+
+  timeLimit = 10;
   $("#audio").attr("hidden", true);
   $.ajax({
     url: englishChatbotServerUrl,
@@ -23,6 +29,7 @@ function send(message) {
     }),
     success: function (data, textStatus) {
       if (data != null) {
+        timeLimit = 10;
         setBotResponse(data);
       }
     },
