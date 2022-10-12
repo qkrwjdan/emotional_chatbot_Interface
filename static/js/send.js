@@ -12,6 +12,11 @@ function uuidv4() {
 let id = uuidv4();
 
 function send(message) {
+  if (timeLimit <= -1) {
+    setBotResponse({ text: "session is ended." });
+    return;
+  }
+
   timeLimit = 10;
   $("#audio").attr("hidden", true);
   $.ajax({
