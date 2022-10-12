@@ -12,6 +12,7 @@ function uuidv4() {
 let id = uuidv4();
 
 function send(message) {
+  timeLimit = 10;
   $("#audio").attr("hidden", true);
   $.ajax({
     url: englishChatbotServerUrl,
@@ -23,6 +24,7 @@ function send(message) {
     }),
     success: function (data, textStatus) {
       if (data != null) {
+        timeLimit = 10;
         setBotResponse(data);
       }
     },
