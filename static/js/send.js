@@ -1,5 +1,5 @@
-const englishChatbotServerUrl = "http://echatbot.site/english";
-const koreanChatbotServerUrl = "http://echatbot.site/korean";
+const englishChatbotServerUrl = "https://echatbot.site/english";
+const koreanChatbotServerUrl = "https://echatbot.site/korean";
 
 function uuidv4() {
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
