@@ -18,7 +18,7 @@ function setUserResponse(val) {
 function sendMessage(e) {
   const keyCode = e.keyCode || e.which;
   const text = $(".usrInput").val();
-  if (keyCode === 13) {
+  if (keyCode === 13 || keyCode === 1) {
     if (text == "" || $.trim(text) == "") {
       e.preventDefault();
       return false;
