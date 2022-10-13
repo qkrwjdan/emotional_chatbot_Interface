@@ -3,3 +3,4 @@ venv/
 Lee_STT.json
 uploads/
 key.json
+.env
