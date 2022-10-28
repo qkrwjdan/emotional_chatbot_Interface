@@ -1,6 +1,6 @@
-const SESSION_TIMEOUT = 10000;
+const SESSION_TIMEOUT = 60;
 
-let timeLimit = 10;
+let timeLimit = SESSION_TIMEOUT;
 let min, sec;
 
 let timer = setInterval(callTimer, 1000);
@@ -12,7 +12,7 @@ function callTimer() {
   timeLimit -= 1;
 
   if (timeLimit < -1) {
-    alert("Session disconnected after 10 seconds.");
+    alert(`Session disconnected after ${SESSION_TIMEOUT} seconds.`);
     clearInterval(timer);
     timeLimit = timeLimitValue;
     return;
