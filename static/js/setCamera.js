@@ -1,6 +1,6 @@
 let isCamera = false;
 let isMobile = false;
-var check = $("input[type='checkbox']");
+var videoCheck = $("#video-checkbox");
 let videoStatus = false;
 let videoTag = document.getElementsByClassName("user-video")[0];
 
@@ -33,9 +33,8 @@ if (!isMobile) {
     });
 }
 
-check.click(function () {
+videoCheck.click(function () {
   if (isCamera) {
-    $(".switch-text").toggle();
     let videoTag = document.getElementsByClassName("user-video")[0];
 
     if (videoStatus == false) {

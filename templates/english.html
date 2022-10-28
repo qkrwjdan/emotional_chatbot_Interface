@@ -89,7 +89,7 @@
                     <div class="audio-switch-box">
                       <p>OFF</p> 
                       <label class="audio-switch">
-                        <input type="checkbox" />
+                        <input id="audio-checkbox" type="checkbox" />
                         <span class="slider round"></span>
                       </label>
                       <p>ON</p>
@@ -105,7 +105,7 @@
                 <div class="switch-box">
                   <p>OFF</p> 
                   <label class="switch">
-                    <input type="checkbox" />
+                    <input id="video-checkbox" type="checkbox" />
                     <span class="slider round"></span>
                   </label>
                   <p>ON</p>
@@ -137,6 +137,10 @@
     <script
       type="text/javascript"
       src="{{ url_for('static',filename='js/timer.js') }}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static',filename='js/setAudio.js') }}"
     ></script>
   </body>
 </html>
