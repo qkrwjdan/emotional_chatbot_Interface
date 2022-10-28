@@ -81,21 +81,34 @@
             />
             <h1 class="intro">Hi I'm ChatBot!</h1>
             <div class="description">
-              <div class="box-wrap">
+              <div class = "audio-wrap">
                 <div>
-                  
+                  <span class="audio-title">Audio</span>
+                  <div class="audio-box">
+                    <audio controls></audio>
+                    <div class="audio-switch-box">
+                      <p>OFF</p> 
+                      <label class="audio-switch">
+                        <input type="checkbox" />
+                        <span class="slider round"></span>
+                      </label>
+                      <p>ON</p>
+                    </div>
+                  </div>
                 </div>
+              </div>
+              <div class="box-wrap">
+                <span class="video-title">Video</span>
                 <div class="image-box">
                   <video controls autoplay src="" class="user-video" onerror="this.style.display='none'">
                 </div>
                 <div class="switch-box">
-                  <span>Video</span>
+                  <p>OFF</p> 
                   <label class="switch">
                     <input type="checkbox" />
                     <span class="slider round"></span>
                   </label>
-                  <p class="switch-text">OFF</p>
-                  <p class="switch-text" style="display: none">ON</p>
+                  <p>ON</p>
                 </div>
               </div>
             </div>

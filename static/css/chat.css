@@ -57,13 +57,13 @@ body {
 
 .intro {
   color: #6072e6;
+  margin-bottom: 20px;
 }
 
 .image-box {
   width: auto;
-  height: 220px;
+  height: 180px;
   margin: auto auto;
-  margin-top: 50px;
 }
 
 .user-video {
@@ -376,7 +376,7 @@ input::placeholder {
 }
 
 /* The switch - the box around the slider */
-.switch {
+.switch ,.audio-switch{
   position: relative;
   display: inline-block;
   width: 60px;
@@ -442,4 +442,13 @@ p {
   display: inline-block;
   font-size: 15px;
   font-weight: bold;
+}
+
+.audio-title, .video-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.audio-wrap {
+  margin-bottom: 20px;
 }
