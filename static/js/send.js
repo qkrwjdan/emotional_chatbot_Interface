@@ -17,7 +17,7 @@ function send(message) {
     return;
   }
 
-  timeLimit = 10;
+  timeLimit = SESSION_TIMEOUT;
   $("#audio").attr("hidden", true);
   $.ajax({
     url: englishChatbotServerUrl,
@@ -29,7 +29,7 @@ function send(message) {
     }),
     success: function (data, textStatus) {
       if (data != null) {
-        timeLimit = 10;
+        timeLimit = SESSION_TIMEOUT;
         setBotResponse(data);
       }
     },
