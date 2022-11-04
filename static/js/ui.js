@@ -18,7 +18,7 @@ function setUserResponse(val) {
 function sendMessage(e) {
   const keyCode = e.keyCode || e.which;
   const text = $(".usrInput").val();
-  if (keyCode === 13 || keyCode ===1 ) {
+  if (keyCode === 13 || keyCode === 1) {
     if (text == "" || $.trim(text) == "") {
       e.preventDefault();
       return false;
@@ -41,14 +41,50 @@ function scrollToBottomOfResults() {
 function setBotResponse(val) {
   setTimeout(function () {
     if (val.hasOwnProperty("text")) {
-      var BotAvatarSrc = "/static/img/botAvatar.png";
-      var BotResponse =
+      let text = null;
+      let image = null;
+      let sound = null;
+
+      if (val.text.search("\\[IMAGE\\]") != -1) {
+        text = val.text.split("[IMAGE]")[0];
+        image = val.text.split("[IMAGE]")[1];
+      } else if (val.text.search("\\[SOUND\\]") != -1) {
+        text = val.text.split("[SOUND]")[0];
+        sound = val.text.split("[SOUND]")[1];
+      } else if (val.text.search("\\[QUOTE\\]") != -1) {
+        text = val.text.split("[QUOTE]")[0];
+      } else {
+        text = val.text;
+      }
+
+      const BotAvatarSrc = "/static/img/botAvatar.png";
+      const BotResponse =
         '<div class="messageBox"><img class="botAvatar" src="' +
         BotAvatarSrc +
         '"><div class="botMsg">' +
-        val.text +
+        text +
         '</div><div class="clearfix"></div></div>';
       $(BotResponse).appendTo(".chats").hide().fadeIn(1000);
+
+      if (image) {
+        const BotImageResponse =
+          '<div class="messageBox"><img class="botAvatar" src="' +
+          BotAvatarSrc +
+          '"><div class="botMsg"> <img class="botMsg" src="' +
+          image +
+          '"></div><div class="clearfix"></div></div>';
+        $(BotImageResponse).appendTo(".chats").hide().fadeIn(1000);
+      }
+
+      if (sound) {
+        const BotSoundResponse =
+          '<div class="messageBox"><img class="botAvatar" src="' +
+          BotAvatarSrc +
+          '"><div class="botMsg"> <audio controls autoplay class="botMsg" src="' +
+          sound +
+          '"></div><div class="clearfix"></div></div>';
+        $(BotSoundResponse).appendTo(".chats").hide().fadeIn(1000);
+      }
     }
 
     scrollToBottomOfResults();
