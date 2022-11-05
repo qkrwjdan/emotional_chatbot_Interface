@@ -31,6 +31,7 @@ function send(message) {
       if (data != null) {
         timeLimit = SESSION_TIMEOUT;
         setBotResponse(data);
+	synthesize(data.text);
       }
     },
     error: function (errorMessage) {
