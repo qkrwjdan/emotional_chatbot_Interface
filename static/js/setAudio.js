@@ -17,10 +17,7 @@ audioCheck.click(function () {
 });
 
 function synthesize(text) {
-  fetch(
-    englishSynthesizeUrl + encodeURIComponent(text),
-    { cache: "no-cache" }
-  )
+  fetch(englishSynthesizeUrl + encodeURIComponent(text), { cache: "no-cache" })
     .then(function (res) {
       if (!res.ok) throw Error(res.statusText);
       return res.blob();
@@ -33,4 +30,3 @@ function synthesize(text) {
       console.log(err);
     });
 }
-

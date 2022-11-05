@@ -9,6 +9,7 @@ import time
 app = Flask(__name__)
 ENG_CHATBOT_URL = os.environ.get("ENG_CHATBOT_URL")
 
+
 def send_message_to_eng_chatbot(input_text, sender):
     headers = {'Content-Type': 'application/json; charset=utf-8'}
     contents = {
@@ -48,11 +49,12 @@ def chat():
 
     return render_template('korean.html')
 
-@app.route('/synthesize',methods=['GET'])
+
+@app.route('/synthesize', methods=['GET'])
 def synthesize():
     if request.method == 'GET':
         input_text = request.args.get('text')
-        resp = requests.get(ENG_CHATBOT_URL + "synthesize?text=" + input_text )
+        resp = requests.get(ENG_CHATBOT_URL + "synthesize?text=" + input_text)
         res = resp.content
         return res
 
