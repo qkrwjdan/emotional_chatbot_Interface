@@ -1,5 +1,6 @@
-const SESSION_TIMEOUT = 60;
+const SESSION_TIMEOUT = 120;
 
+const ALERT_TIME = 10;
 let timeLimit = SESSION_TIMEOUT;
 let min, sec;
 
@@ -11,10 +12,14 @@ function callTimer() {
 
   timeLimit -= 1;
 
+  const timeAlertMessage = `Session has been idle over its time limit(2 mins).\nPress enter sentence to continue session.`;
+  if (timeLimit == ALERT_TIME) {
+    alert(timeAlertMessage);
+  }
+
   if (timeLimit < -1) {
-    alert(`Session disconnected after ${SESSION_TIMEOUT} seconds.`);
+    alert(`Session has ended`);
     clearInterval(timer);
-    timeLimit = timeLimitValue;
     return;
   }
 }
