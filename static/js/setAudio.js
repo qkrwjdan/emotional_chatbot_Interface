@@ -8,15 +8,14 @@ if (!isMobile) {
 
 audioCheck.click(function () {
   if (audioStatus == false) {
-    console.log("audio on");
     audioStatus = true;
   } else {
-    console.log("audio off");
     audioStatus = false;
   }
 });
 
 function synthesize(text) {
+  if (!audioStatus) return;
   fetch(englishSynthesizeUrl + encodeURIComponent(text), { cache: "no-cache" })
     .then(function (res) {
       if (!res.ok) throw Error(res.statusText);
