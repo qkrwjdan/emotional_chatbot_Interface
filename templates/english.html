@@ -8,10 +8,11 @@
       rel="stylesheet"
     />
     <!--Import materialize.css-->
+    <!-- href="{{ url_for('static',filename='css/chat.css')}}" -->
     <link
       rel="stylesheet"
       type="text/css"
-      href="{{ url_for('static',filename='css/chat.css')}}"
+      href="../static/css/chat.css"
     />
     <!--Main css-->
     <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/materialize.min.css')}}"> -->
@@ -28,6 +29,21 @@
   </head>
 
   <body>
+  <div id="modal" class="modal-overlay">
+      <div class="modal-window">
+          <div class="title">
+              <h2>모달</h2>
+          </div>
+          <div class="close-area">X</div>
+          <div class="content">
+              <p>가나다라마바사 아자차카타파하</p>
+              <p>가나다라마바사 아자차카타파하</p>
+              <p>가나다라마바사 아자차카타파하</p>
+              <p>가나다라마바사 아자차카타파하</p>
+              
+          </div>
+      </div>
+  </div>
     <div class="wrap">
       <header class="header">
         <!-- header -->
@@ -37,7 +53,7 @@
           </a>
           <div class="nav-inner">
             <div class="question">
-               <i class="fas fa-question"></i>
+               <i class="fas fa-question" id="btn-modal"></i>
                <p class="question-text">
                   Type a message.
                   <br>
@@ -142,5 +158,9 @@
       type="text/javascript"
       src="{{ url_for('static',filename='js/setAudio.js') }}"
     ></script>
+    <script
+    type="text/javascript"
+    src="../static/js/helperModal.js">
+    </script>
   </body>
 </html>
