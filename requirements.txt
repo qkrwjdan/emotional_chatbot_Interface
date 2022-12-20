@@ -1,4 +1,1 @@
-tensorflow==2.4.1
 Flask==1.1.2
-google-cloud-speech==2.2.1
-regex==2021.4.4
