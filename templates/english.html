@@ -8,11 +8,10 @@
       rel="stylesheet"
     />
     <!--Import materialize.css-->
-    <!-- href="{{ url_for('static',filename='css/chat.css')}}" -->
     <link
       rel="stylesheet"
       type="text/css"
-      href="../static/css/chat.css"
+      href="{{ url_for('static',filename='css/chat.css')}}"
     />
     <!--Main css-->
     <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/materialize.min.css')}}"> -->
@@ -29,21 +28,45 @@
   </head>
 
   <body>
-  <div id="modal" class="modal-overlay">
-      <div class="modal-window">
-          <div class="title">
-              <h2>모달</h2>
+    <div id="modal" class="modal-overlay">
+        <div class="modal-window">
+          <div class="modal-header">
+            <div class="modal-title">
+              <img src="../static/img/botAvatar.png"/>
+            </div>
+            <div class="modal-close-area">X</div>
           </div>
-          <div class="close-area">X</div>
-          <div class="content">
-              <p>가나다라마바사 아자차카타파하</p>
-              <p>가나다라마바사 아자차카타파하</p>
-              <p>가나다라마바사 아자차카타파하</p>
-              <p>가나다라마바사 아자차카타파하</p>
-              
-          </div>
-      </div>
-  </div>
+            <div class="modal-content">
+              <div class="modal-sub-area">
+                <p class="modal-sub-content">
+                  I'm meorable and emotional chatbot using transfer learning (fine tune GPT-2 345M)
+                </p>
+              </div>
+              <hr>
+            <div class="modal-sub-area">
+              <p class="modal-sub-title">
+                Q. How to use Wikipedia
+              </p>
+              <br>
+              <p class="modal-sub-content">
+                A. Ask like "What is the disease [disease]"
+              </p>
+            </div>
+            <hr>
+            <div class="modal-sub-area">
+              <p class="modal-sub-title">
+                Q. How to get other response
+              </p>
+              <br>
+              <p class="modal-sub-content">A. You want to get picture ask to chatbot like "Do you have something funny?"</p>
+              <br>
+              <p class="modal-sub-content">A. You want to get sound ask to chatbot like "I want to hear your reaction"</p>
+              <br>
+              <p class="modal-sub-content">A. You want to get quote ask to chatbot like "What is your life motto?"</p>
+            </div>
+            </div>
+        </div>
+    </div>
     <div class="wrap">
       <header class="header">
         <!-- header -->
@@ -159,8 +182,8 @@
       src="{{ url_for('static',filename='js/setAudio.js') }}"
     ></script>
     <script
-    type="text/javascript"
-    src="../static/js/helperModal.js">
-    </script>
+      type="text/javascript"
+      src="{{ url_for('static',filename='js/helperModal.js') }}"
+    ></script>
   </body>
 </html>

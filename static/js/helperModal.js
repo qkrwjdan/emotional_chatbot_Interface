@@ -1,4 +1,6 @@
 const modal = document.getElementById("modal");
+modal.style.display = "none";
+
 function modalOn() {
   modal.style.display = "flex";
 }
@@ -12,9 +14,8 @@ const btnModal = document.getElementById("btn-modal");
 btnModal.addEventListener("click", (e) => {
   modalOn();
 });
-const closeBtn = modal.querySelector(".close-area");
+const closeBtn = modal.querySelector(".modal-close-area");
 closeBtn.addEventListener("click", (e) => {
-  console.log("클릭");
   modalOff();
 });
 modal.addEventListener("click", (e) => {
