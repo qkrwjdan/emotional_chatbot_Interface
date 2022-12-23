@@ -1,14 +1,10 @@
 from flask import Flask, render_template, request
-from dotenv import load_dotenv
-
 import requests
 import json
-import os
-import time
 
 app = Flask(__name__)
-ENG_CHATBOT_URL = os.environ.get("ENG_CHATBOT_URL")
-
+ENG_CHATBOT_URL = "ip for chatbot server"
+PORT = 3000
 
 def send_message_to_eng_chatbot(input_text, sender):
     headers = {'Content-Type': 'application/json; charset=utf-8'}
@@ -38,18 +34,6 @@ def english():
     return render_template('english.html')
 
 
-@app.route('/korean', methods=('GET', 'POST'))
-def chat():
-    if request.method == 'POST':
-        input_text = request.json['message']
-        print(input_text)
-        answer = "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"
-        context = {'text': answer, 'recipient_id': request.json['sender']}
-        return context
-
-    return render_template('korean.html')
-
-
 @app.route('/synthesize', methods=['GET'])
 def synthesize():
     if request.method == 'GET':
@@ -65,4 +49,4 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000, debug=True, threaded=False)
+    app.run(host='0.0.0.0', port=PORT, debug=True, threaded=False)
