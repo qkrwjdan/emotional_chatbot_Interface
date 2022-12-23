@@ -457,11 +457,11 @@ p {
 
 .modal-overlay {
   width: 100%;
-  height: 100%;
+  height: 120%;
   position: absolute;
   left: 0;
   top: 0;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -471,6 +471,7 @@ p {
   -webkit-backdrop-filter: blur(1.5px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
+  z-index: 100;
 }
 .modal-window {
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
