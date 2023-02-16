@@ -11,8 +11,9 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="{{ url_for('static',filename='css/chat.css')}}"
-    />
+      href="../static/css/chat.css"
+      />
+      <!-- href="{{ url_for('static',filename='css/chat.css')}}" -->
     <!--Main css-->
     <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/materialize.min.css')}}"> -->
     <link
@@ -33,25 +34,29 @@
           <div class="modal-header">
             <div></div>
             <div class="modal-title">
-              <img src="../static/img/botAvatar.png"/>
+              <img class="modal-img" src="../static/img/botAvatar.png"/>
             </div>
             <div class="modal-close-area">X</div>
           </div>
           <div class="modal-content">
             <div class="modal-sub-area">
-              <p class="modal-sub-content">
-                This chatbot is memorable and emotional chatbot 
+              <p class="modal-sub-explain">
+                This chatbot was developed using pipeline and GPT tranfer learning. 
               </p>
             </div>
-            <hr>
-            <div class="modal-sub-area">
+            <div class="modal-content-area">
               <p class="modal-sub-content">
-                You can use the Wikipedia search function if you ask like "What is the [disease]"
+                Press the video button for video input and the audio button for audio output.
               </p>
-            </div>
-            <hr>
-            <div class="modal-sub-area">
-              <p class="modal-sub-content">Picture, sound, and quote can also come in response.</p>
+              <p class="modal-sub-content">
+                For emotion dialog, sometimes image, sound, quote, etc. are provided.
+              </p>
+              <p class="modal-sub-content">
+                To get information about Wikipedia, type the sentence "What is OOO from wiki".
+              </p>
+              <p class="modal-sub-content">
+                After 30 seconds, the session is automatically terminated.
+              </p>
             </div>
           </div>
         </div>
@@ -64,11 +69,11 @@
             <i class="fas fa-chevron-left" id="refresh-icon"></i>
           </a>
           <div class="nav-inner">
-            <div class="question">
-               <i class="fas fa-question" id="btn-modal"></i>
+            <div class="question" id="btn-modal">
+              Help
             </div>
             <a class="refresh" href="/english">
-               <i class="fas fa-redo"></i>
+              Reset
             </a>
          </div>
         </nav>
@@ -167,7 +172,8 @@
     ></script>
     <script
       type="text/javascript"
-      src="{{ url_for('static',filename='js/helperModal.js') }}"
-    ></script>
-  </body>
+      src="../static/js/helperModal.js"
+      ></script>
+      <!-- src="{{ url_for('static',filename='js/helperModal.js') }}" -->
+    </body>
 </html>
