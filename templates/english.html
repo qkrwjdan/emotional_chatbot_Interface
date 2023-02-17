@@ -11,9 +11,8 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="../static/css/chat.css"
+      href="{{ url_for('static',filename='css/chat.css')}}"
       />
-      <!-- href="{{ url_for('static',filename='css/chat.css')}}" -->
     <!--Main css-->
     <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/materialize.min.css')}}"> -->
     <link
@@ -32,15 +31,12 @@
     <div id="modal" class="modal-overlay">
         <div class="modal-window">
           <div class="modal-header">
-            <div></div>
-            <div class="modal-title">
-              <img class="modal-img" src="../static/img/botAvatar.png"/>
-            </div>
+            <div class="modal-title">Help</div>
             <div class="modal-close-area">X</div>
           </div>
           <div class="modal-content">
-            <div class="modal-sub-area">
-              <p class="modal-sub-explain">
+            <div class="modal-content-area">
+              <p class="modal-sub-content">
                 This chatbot was developed using pipeline and GPT tranfer learning. 
               </p>
             </div>
@@ -172,8 +168,7 @@
     ></script>
     <script
       type="text/javascript"
-      src="../static/js/helperModal.js"
+      src="{{ url_for('static',filename='js/helperModal.js') }}"
       ></script>
-      <!-- src="{{ url_for('static',filename='js/helperModal.js') }}" -->
     </body>
 </html>

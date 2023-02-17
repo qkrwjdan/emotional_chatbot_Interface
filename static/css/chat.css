@@ -430,35 +430,36 @@ p {
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   width: 560px;
-  height: 400px;
+  height: 360px;
   position: relative;
   top: -100px;
 }
 .modal-header {
   background: #e6e9fa;
-  justify-content: space-between;
-  display: flex;
-  height: 90px;
+  height: 30px;
   padding: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.modal-title {
-  padding-left: 20px;
-}
 .modal-close-area {
   display: inline;
-  float: right;
   padding-right: 10px;
   cursor: pointer;
   font-size: 25px;
   background: #e6e9fa;
   color: #6072e6;
 }
-
+.modal-title {
+  font-size: 30px;
+  font-weight: bold;
+  color: #6072e6;
+}
 .modal-content {
   color: #6072e6;
   height: 290px;
   border-radius: 0 0 10px 10px;
+  padding: 10px;
   background-color: #fff;
 }
 
@@ -469,8 +470,9 @@ p {
 
 .modal-sub-explain {
   font-size: 18px;
-  padding: 20px 20px 10px 20px;
-  font-weight: normal;
+  color: #6072e6;
+  font-weight: bold;
+  padding-top: 15px;
 }
 
 .modal-sub-content {
@@ -484,6 +486,18 @@ img {
   height: 90px;
 }
 
+.modal-explain-text {
+  width: 400px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.modal-explain {
+  display: flex;
+  margin: "auto";
+}
 @media screen and (max-width: 480px),
   screen and (max-height: 480px) and (orientation: landscape) {
   .container {
@@ -536,25 +550,28 @@ img {
     font-size: 15px;
   }
   .modal-header {
-    height: 50px;
+    height: 20px;
+  }
+  .modal-title {
+    font-size: 20px;
   }
   .modal-content {
-    height: 175px;
+    height: 140px;
   }
   .modal-window {
     width: 300px;
-    height: 245px;
+    height: 230px;
   }
   .modal-img {
     width: 50px;
     height: 50px;
   }
-  .modal-close-area {
-    font-size: 15px;
-  }
   .modal-sub-explain {
     font-size: 10px;
     padding: 10px 10px 0 20px;
+  }
+  .modal-close-area {
+    font-size: 15px;
   }
   .modal-sub-content {
     padding: 5px 20px;
