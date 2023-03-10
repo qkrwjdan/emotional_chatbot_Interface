@@ -426,7 +426,7 @@ p {
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   width: 560px;
-  height: 360px;
+  height: 370px;
   position: relative;
   top: -100px;
 }
@@ -453,7 +453,7 @@ p {
 }
 .modal-content {
   color: #6072e6;
-  height: 290px;
+  height: 300px;
   border-radius: 0 0 10px 10px;
   padding: 10px;
   background-color: #fff;
