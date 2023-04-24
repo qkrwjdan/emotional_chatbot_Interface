@@ -531,7 +531,7 @@ img {
   }
   .center-area {
     width: 80vw;
-    height: calc(100vh - 50px);
+    height: calc(100vh - 90px);
   }
   .center-area .chats {
     margin-top: 0;
@@ -549,7 +549,7 @@ img {
     height: 45px;
   }
   .rt-center-area {
-    height: calc(100vh - 110px);
+    height: calc(100vh - 90px);
   }
   .right-area .rt-description {
     display: flex;
