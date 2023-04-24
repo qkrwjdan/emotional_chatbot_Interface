@@ -513,7 +513,7 @@ img {
     display: none;
   }
   .right-area {
-    height: 55px;
+    height: 35px;
   }
   .audio-switch {
     height: 20px;
@@ -551,9 +551,6 @@ img {
   .rt-center-area {
     height: calc(100vh - 90px);
   }
-  .right-area {
-    width: 100%;
-  }
   .right-area .rt-description {
     display: flex;
     justify-content: center;
@@ -564,7 +561,12 @@ img {
   .right-area .audio-box audio {
     height: 30px;
   }
-
+  .chats {
+    padding-top: 30px;
+  }
+  .audio-title {
+    padding-top: 5px;
+  }
   .refresh,
   .question {
     font-size: 15px;
