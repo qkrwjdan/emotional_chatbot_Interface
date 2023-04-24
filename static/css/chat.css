@@ -549,7 +549,7 @@ img {
     height: 45px;
   }
   .rt-center-area {
-    height: calc(100vh - 90px);
+    height: calc(100vh - 110px);
   }
   .right-area .rt-description {
     display: flex;
